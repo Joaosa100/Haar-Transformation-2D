@@ -109,19 +109,19 @@ void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, 
 }
 
 int main() {
-    const char *inputFilename = "../images/igirl.pgm";
-    const char *outputFilename = "../compressedImages/output.pgm";
+    const char *inputFilename = "images/pgm/input.pgm";
+    const char *outputFilename = "images/pgm_output/output.pgm";
 
     int size;
     double image[MAX_SIZE][MAX_SIZE];  // Usando array estático para a imagem
 
     readPGM(inputFilename, image, &size);
 
-    printf("Imagem lida com sucesso. Aplicando Transformação de Haar...\n");
+    printf("Imagem lida com sucesso. Aplicando Transformacao de Haar...\n");
 
     haarTransform2D(image, size);
 
-    printf("Transformação de Haar concluída. Salvando resultado...\n");
+    printf("Transformacao de Haar concluida. Salvando resultado...\n");
 
     savePGM(outputFilename, image, size, 255);
 
