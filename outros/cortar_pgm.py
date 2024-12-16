@@ -1,6 +1,6 @@
 import numpy as np
 
-def load_pgm_p2(file_path):
+def lerPGM(file_path):
     with open(file_path, 'r') as f:
         header = f.readline().strip()
         
@@ -21,7 +21,7 @@ def load_pgm_p2(file_path):
         img = np.array(pixels, dtype=np.uint8).reshape((height, width))
         return img
 
-def save_pgm_p2(matrix, file_path):
+def salvarPGM(matrix, file_path):
     with open(file_path, 'w') as f:
         f.write('P2\n')
         f.write(f'{matrix.shape[1]} {matrix.shape[0]}\n')
@@ -38,8 +38,6 @@ nome = 'animal4'
 pgm_file = 'images/pgm_output/' + nome + '.pgm'
 output_file = 'images/pgm_compressao/' + nome + '.pgm'
 
-imagem = load_pgm_p2(pgm_file)
+imagem = lerPGM(pgm_file)
 imagem_45x45 = extract_45x45(imagem)
-save_pgm_p2(imagem_45x45, output_file)
-
-print("Imagem 45x45 extraida e salva com sucesso!")
+salvarPGM(imagem_45x45, output_file)
