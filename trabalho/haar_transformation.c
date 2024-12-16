@@ -111,8 +111,8 @@ void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, 
 }
 
 int main() {
-    const char *inputFilename = "images/pgm/animal3.pgm";
-    const char *outputFilename = "images/pgm_output/animal3.pgm";
+    const char *inputFilename = "images/pgm/pessoa4.pgm";
+    const char *outputFilename = "images/pgm_output/pessoa4.pgm";
 
     int size;
     double image[MAX_SIZE][MAX_SIZE];

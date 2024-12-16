@@ -3,7 +3,7 @@ import pywt  # Biblioteca PyWavelets
 import numpy as np
 import matplotlib.pyplot as plt
 
-nomeImg = "animal3"
+nomeImg = "pessoa4"
 
 imagem_input = 'images/pgm/' + nomeImg + '.pgm'
 imagem_output = 'images/pgm_output/' + nomeImg + '_pywt.pgm'
@@ -13,7 +13,8 @@ img = cv2.imread(imagem_input, cv2.IMREAD_GRAYSCALE)
 
 # Transformada 2D Discreta de Wavelet
 coeffs2 = pywt.dwt2(img, 'haar')
-LL, (LH, HL, HH) = coeffs2  # Low Low, Low High, High Low, High High
+# Low Low, Low High(vertical), High Low (horizontal), High High(diagonal)
+LL, (LH, HL, HH) = coeffs2 
 haar_img = np.vstack((np.hstack((LL, HL)), np.hstack((LH, HH))))
 
 #haar_img[haar_img < 0] = 0
