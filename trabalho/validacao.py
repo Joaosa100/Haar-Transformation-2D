@@ -45,7 +45,7 @@ def compararPGMs(path1, path2, tolerancia, path):
     return diferencas
 
 
-nome = 'pessoa4'
+nome = 'animal4'
 
 img1 = 'images/pgm_output/' + nome + '.pgm'
 img2 = 'images/pgm_output/' + nome + '_pywt.pgm'

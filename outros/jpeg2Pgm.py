@@ -16,6 +16,6 @@ def jpeg2Pgm(input_file, output_file):
             line_str = ' '.join(map(str, line))
             f.write(f'{line_str}\n')
 
-nome = 'pessoa4'
+nome = 'animal4'
 
 jpeg2Pgm("images/rgb/" + nome + ".jpeg", "images/pgm/" + nome + ".pgm")
