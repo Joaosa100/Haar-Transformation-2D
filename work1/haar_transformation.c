@@ -109,8 +109,8 @@ void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, 
 }
 
 int main() {
-    const char *inputFilename = "../images/eye.pgm";
-    const char *outputFilename = "../compressedImages/eyeoutput.pgm";
+    const char *inputFilename = "../images/barbara.pgm";
+    const char *outputFilename = "../compressedImages/baroutput.pgm";
 
     int size;
     double image[MAX_SIZE][MAX_SIZE];  // Usando array estático para a imagem
