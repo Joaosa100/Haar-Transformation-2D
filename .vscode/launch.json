@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/augus/Downloads/projeto-semb/Haar-Transformation/work1",
-      "program": "c:/Users/augus/Downloads/projeto-semb/Haar-Transformation/work1/build/Debug/outDebug",
+      "cwd": "c:/Users/augus/Downloads/projeto-semb/Haar-Transformation/trabalho",
+      "program": "c:/Users/augus/Downloads/projeto-semb/Haar-Transformation/trabalho/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
