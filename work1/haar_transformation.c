@@ -3,7 +3,7 @@
 #include <math.h>
 #include <string.h>
 
-#define MAX_SIZE 90  // Tamanho máximo da imagem, defina de acordo com sua necessidade
+#define MAX_SIZE 512  // Tamanho máximo da imagem, defina de acordo com sua necessidade
 
 // Função para aplicar Transformação de Haar em uma dimensão
 void haarTransform1D(double data[], int length) {
