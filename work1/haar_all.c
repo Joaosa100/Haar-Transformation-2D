@@ -16,7 +16,7 @@ void haarTransform2D(double matrix[MAX_SIZE][MAX_SIZE], int size) {
         }
     }
 
-    // Calculate only LL coefficients (top-left quadrant)
+    // Process 2x2 blocks directly (matches PyWavelets behavior)
     for (int i = 0; i < half; i++) {
         for (int j = 0; j < half; j++) {
             double a = temp[2*i][2*j];
@@ -24,20 +24,17 @@ void haarTransform2D(double matrix[MAX_SIZE][MAX_SIZE], int size) {
             double c = temp[2*i+1][2*j];
             double d = temp[2*i+1][2*j+1];
 
-            // Only calculate LL quadrant
+            // LL quadrant (top-left)
             matrix[i][j] = (a + b + c + d) / 2.0;
-        }
-    }
-
-    // Clear the rest of the matrix (since we only want LL)
-    for (int i = 0; i < half; i++) {
-        for (int j = half; j < size; j++) {
-            matrix[i][j] = 0;
-        }
-    }
-    for (int i = half; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            matrix[i][j] = 0;
+            
+            // HL quadrant (top-right)
+            matrix[i][j + half] = (a + b - c - d) / 2.0;
+            
+            // LH quadrant (bottom-left)
+            matrix[i + half][j] = (a - b + c - d) / 2.0;
+            
+            // HH quadrant (bottom-right)
+            matrix[i + half][j + half] = (a - b - c + d) / 2.0;
         }
     }
 }
