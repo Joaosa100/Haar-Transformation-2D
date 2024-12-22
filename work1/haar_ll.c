@@ -5,39 +5,20 @@
 
 #define MAX_SIZE 90
 
-void haarTransform2D(double matrix[MAX_SIZE][MAX_SIZE], int size) {
-    double temp[MAX_SIZE][MAX_SIZE];
-    int half = size / 2;
+void haarTransform2D(double input[MAX_SIZE][MAX_SIZE], double output[MAX_SIZE][MAX_SIZE], int input_size, int *output_size) {
+    int half = input_size / 2;
+    *output_size = half;  // Set the new size to half of the input
 
-    // Copy input to temp
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            temp[i][j] = matrix[i][j];
-        }
-    }
-
-    // Calculate only LL coefficients (top-left quadrant)
+    // Calculate only LL coefficients
     for (int i = 0; i < half; i++) {
         for (int j = 0; j < half; j++) {
-            double a = temp[2*i][2*j];
-            double b = temp[2*i][2*j+1];
-            double c = temp[2*i+1][2*j];
-            double d = temp[2*i+1][2*j+1];
+            double a = input[2*i][2*j];
+            double b = input[2*i][2*j+1];
+            double c = input[2*i+1][2*j];
+            double d = input[2*i+1][2*j+1];
 
-            // Only calculate LL quadrant
-            matrix[i][j] = (a + b + c + d) / 2.0;
-        }
-    }
-
-    // Clear the rest of the matrix (since we only want LL)
-    for (int i = 0; i < half; i++) {
-        for (int j = half; j < size; j++) {
-            matrix[i][j] = 0;
-        }
-    }
-    for (int i = half; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            matrix[i][j] = 0;
+            // Calculate LL coefficient
+            output[i][j] = (a + b + c + d) / 2.0;
         }
     }
 }
@@ -84,12 +65,11 @@ void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, 
     }
 
     fprintf(file, "P2\n");
-    fprintf(file, "%d %d\n", size, size);
+    fprintf(file, "%d %d\n", size, size);  // Now using the reduced size
     fprintf(file, "%d\n", maxVal);
 
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) {  // Only loop through the reduced size
         for (int j = 0; j < size; j++) {
-            // Match Python's np.clip() behavior
             double val = matrix[i][j];
             val = val < 0 ? 0 : (val > maxVal ? maxVal : val);
             fprintf(file, "%d ", (int)val);
@@ -100,18 +80,19 @@ void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, 
 }
 
 int main() {
-    const char *inputFilename = "../images/pgm/pessoa1.pgm";
-    const char *outputFilename = "../images/pgm_output/pessoa1.pgm";
-    int size;
-    double image[MAX_SIZE][MAX_SIZE];
+    const char *inputFilename = "../images/pgm/animal3.pgm";
+    const char *outputFilename = "../images/pgm_output/animal3.pgm";
+    int input_size, output_size;
+    double input_image[MAX_SIZE][MAX_SIZE];
+    double output_image[MAX_SIZE][MAX_SIZE];
 
-    readPGM(inputFilename, image, &size);
+    readPGM(inputFilename, input_image, &input_size);
     printf("Imagem lida com sucesso. Aplicando Transformacao de Haar...\n");
 
-    haarTransform2D(image, size);
+    haarTransform2D(input_image, output_image, input_size, &output_size);
 
     printf("Transformacao de Haar concluida. Salvando resultado...\n");
-    savePGM(outputFilename, image, size, 255);
+    savePGM(outputFilename, output_image, output_size, 255);
     printf("Arquivo salvo em '%s'.\n", outputFilename);
 
     return 0;
