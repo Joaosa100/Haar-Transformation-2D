@@ -12,10 +12,6 @@
  * @license MIT License
  * Este projeto é distribuído sob os termos da MIT License. Consulte o arquivo LICENSE para mais detalhes.
  * 
- * @verbatim 
- * Copyright 2024 
- * @endverbatim
- * 
  * @usage 
  * Para usar esta aplicação, compile o código e execute o binário resultante. A imagem de entrada deve estar no 
  * formato PGM (P2) e ser quadrada (mesma largura e altura). 
