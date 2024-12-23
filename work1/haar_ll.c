@@ -4,11 +4,19 @@
 
 #define MAX_SIZE 90
 
+/**
+ * @brief Realiza a Transformação de Haar 2D em uma imagem.
+ * 
+ * @param input Matriz de entrada contendo a imagem original.
+ * @param output Matriz de saída contendo a imagem transformada.
+ * @param input_size Tamanho da imagem de entrada.
+ * @param output_size Tamanho da imagem de saída.
+ */
 void haarTransform2D(double input[MAX_SIZE][MAX_SIZE], double output[MAX_SIZE][MAX_SIZE], int input_size, int *output_size) {
     int half = input_size / 2;
-    *output_size = half;  // Set the new size to half of the input
+    *output_size = half; //Define tamanho de saída para a metade do tamanho de entrada
 
-    // Calculate only LL coefficients
+    // Calcula apenas os coeficientes de baixa frequência (LL)
     for (int i = 0; i < half; i++) {
         for (int j = 0; j < half; j++) {
             double a = input[2*i][2*j];
@@ -16,12 +24,19 @@ void haarTransform2D(double input[MAX_SIZE][MAX_SIZE], double output[MAX_SIZE][M
             double c = input[2*i+1][2*j];
             double d = input[2*i+1][2*j+1];
 
-            // Calculate LL coefficient
+            // Calculo dos coeficientes LL
             output[i][j] = (a + b + c + d) / 2.0;
         }
     }
 }
 
+/**
+ * @brief Lê uma imagem PGM (P2) de um arquivo e armazena na matriz.
+ * 
+ * @param filename Nome do arquivo de imagem de entrada.
+ * @param matrix Matriz para armazenar a imagem lida.
+ * @param size Ponteiro para armazenar o tamanho da imagem.
+ */
 void readPGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int *size) {
     FILE *file = fopen(filename, "r");
     if (!file) {
@@ -56,6 +71,14 @@ void readPGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int *size)
     fclose(file);
 }
 
+/**
+ * @brief Salva uma imagem em formato PGM (P2).
+ * 
+ * @param filename Nome do arquivo para salvar a imagem de saída.
+ * @param matrix Matriz contendo a imagem a ser salva.
+ * @param size Tamanho da imagem.
+ * @param maxVal Valor máximo da escala de cinza.
+ */
 void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, int maxVal) {
     FILE *file = fopen(filename, "w");
     if (!file) {
@@ -64,10 +87,10 @@ void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, 
     }
 
     fprintf(file, "P2\n");
-    fprintf(file, "%d %d\n", size, size);  // Now using the reduced size
+    fprintf(file, "%d %d\n", size, size);  // usando o tamanho reduzido
     fprintf(file, "%d\n", maxVal);
 
-    for (int i = 0; i < size; i++) {  // Only loop through the reduced size
+    for (int i = 0; i < size; i++) {  // Loop apenas no tamanho reduzido
         for (int j = 0; j < size; j++) {
             double val = matrix[i][j];
             val = val < 0 ? 0 : (val > maxVal ? maxVal : val);
@@ -85,12 +108,15 @@ int main() {
     double input_image[MAX_SIZE][MAX_SIZE];
     double output_image[MAX_SIZE][MAX_SIZE];
 
+    // Lê a imagem de entrada no formato PGM
     readPGM(inputFilename, input_image, &input_size);
     printf("Imagem lida com sucesso. Aplicando Transformacao de Haar...\n");
 
+    // Aplica a Transformação de Haar 2D
     haarTransform2D(input_image, output_image, input_size, &output_size);
 
     printf("Transformacao de Haar concluida. Salvando resultado...\n");
+    // Salva a imagem transformada no formato PGM
     savePGM(outputFilename, output_image, output_size, 255);
     printf("Arquivo salvo em '%s'.\n", outputFilename);
 
