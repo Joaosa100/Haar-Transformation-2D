@@ -1,8 +1,46 @@
+/** 
+ * @file haar_transform.c 
+ * @brief Implementação da Transformada de Haar 2D para compressão de imagens. 
+ * @details Esta aplicação lê uma imagem no formato PGM, aplica a Transformada de Haar 2D para compressão 
+ * e salva a imagem resultante. 
+ * 
+ * @copyright 
+ * @verbatim 
+ * Copyright 2024 
+ * @endverbatim
+ * 
+ * @usage 
+ * Para usar esta aplicação, compile o código e execute o binário resultante. A imagem de entrada deve estar no 
+ * formato PGM (P2) e ser quadrada (mesma largura e altura). 
+ * 
+ * @entry 
+ * - inputFilename: Nome do arquivo de imagem de entrada em formato PGM. 
+ * - outputFilename: Nome do arquivo de imagem de saída após a transformação. 
+ * 
+ * @output 
+ * - Uma imagem comprimida usando a Transformada de Haar 2D, salva no formato PGM.
+ * 
+ * @authors 
+ * João Vitor Silva Assunção
+ * Maria Augusta Sousa Rios
+ * 
+ * @date 
+ * 23 de Dezembro de 2024 
+ * 
+ * @context 
+ * Trabalho de Sistemas Embarcados 
+ * Desenvolvimento de SW Embarcado
+ * Compressão de Imagens com Transformada de Haar 
+ * 
+ * @target
+ * Plataforma Alvo: Linux/Windows
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_SIZE 90
+#define MAX_SIZE 90 // Tamanho máximo da matriz de entrada e saída
 
 /**
  * @brief Realiza a Transformação de Haar 2D em uma imagem.
@@ -101,6 +139,13 @@ void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, 
     fclose(file);
 }
 
+/**
+ * @brief Função principal que executa a transformação de Haar em uma imagem PGM
+ * 
+ * Lê uma imagem PGM, aplica a Transformação de Haar 2D e salva a imagem resultante.
+ * 
+ * @return int Código de status de execução
+ */
 int main() {
     const char *inputFilename = "../images/pgm/animal3.pgm";
     const char *outputFilename = "../images/pgm_output/animal3.pgm";
