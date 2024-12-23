@@ -5,6 +5,13 @@
  * e salva a imagem resultante. 
  * 
  * @copyright 
+ * Copyright (c) 2024 João Vitor Silva Assunção e Maria Augusta Sousa Rios.
+ * Todos os direitos reservados. Este código é parte de um projeto acadêmico apra a disciplina de
+ * Sistemas Embarcados do Instituto Federal de Educação, Ciência e Tecnologia do Ceará (IFCE).
+ * 
+ * @license MIT License
+ * Este projeto é distribuído sob os termos da MIT License. Consulte o arquivo LICENSE para mais detalhes.
+ * 
  * @verbatim 
  * Copyright 2024 
  * @endverbatim
