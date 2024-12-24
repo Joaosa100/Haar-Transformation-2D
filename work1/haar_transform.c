@@ -38,6 +38,18 @@
  * @target
  * Plataforma Alvo: Linux/Windows
  */
+ /*-----------------------------------------------------------------------------------------------------------------------------------------
+-- #1.
+-- Date: Dez,21,2024
+-- Author: João Vitor Silva Assunção
+-- Motivo: Remoção dos cálculos envolvendo o sqrt da biblioteca <math.h>
+---------------------------------------------------------------------------------------------------------------------------
+  -- #2.
+-- Date: Dez,21,2024
+-- Author: João Vitor Silva Assunção
+-- Motivo: Garantir o cast correto após os cálculos
+---------------------------------------------------------------------------------------------------------------------------
+**/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,6 +65,7 @@
  * @param input_size Tamanho da imagem de entrada.
  * @param output_size Tamanho da imagem de saída.
  */
+//By João: #1.
 void haarTransform2D(double input[MAX_SIZE][MAX_SIZE], double output[MAX_SIZE][MAX_SIZE], int input_size, int *output_size) {
     int half = input_size / 2;
     *output_size = half; //Define tamanho de saída para a metade do tamanho de entrada
@@ -70,6 +83,7 @@ void haarTransform2D(double input[MAX_SIZE][MAX_SIZE], double output[MAX_SIZE][M
         }
     }
 }
+//End by João
 
 /**
  * @brief Lê uma imagem PGM (P2) de um arquivo e armazena na matriz.
@@ -128,6 +142,7 @@ void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, 
     }
 
     fprintf(file, "P2\n");
+//By João: #2
     fprintf(file, "%d %d\n", size, size);  // usando o tamanho reduzido
     fprintf(file, "%d\n", maxVal);
 
@@ -136,6 +151,7 @@ void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, 
             double val = matrix[i][j];
             val = val < 0 ? 0 : (val > maxVal ? maxVal : val);
             fprintf(file, "%d ", (int)val);
+//End by João
         }
         fprintf(file, "\n");
     }
