@@ -42,12 +42,12 @@
 -- #1.
 -- Date: Dez,21,2024
 -- Author: João Vitor Silva Assunção
--- Motivo: Remoção dos cálculos envolvendo o sqrt da biblioteca <math.h>
+-- Motivo: Remoção dos cálculos envolvendo o sqrt da biblioteca <math.h> 
 ---------------------------------------------------------------------------------------------------------------------------
-  -- #2.
--- Date: Dez,21,2024
--- Author: João Vitor Silva Assunção
--- Motivo: Garantir o cast correto após os cálculos
+-- #2.
+-- Date: Dez,22,2024
+-- Author: Maria Augusta Sousa Rios
+-- Motivo: Adicionada validação de valores para garantir range entre 0 e maxVal e implementado cast explícito de double para int na saída
 ---------------------------------------------------------------------------------------------------------------------------
 **/
 
@@ -142,7 +142,7 @@ void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, 
     }
 
     fprintf(file, "P2\n");
-//By João: #2
+//By Maria: #2
     fprintf(file, "%d %d\n", size, size);  // usando o tamanho reduzido
     fprintf(file, "%d\n", maxVal);
 
