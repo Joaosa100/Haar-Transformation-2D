@@ -3,10 +3,10 @@ import pywt  # Biblioteca PyWavelets
 import numpy as np
 import matplotlib.pyplot as plt
 
-nomeImg = "animal4"
+nomeImg = "animal3"
 
-imagem_input = 'images/pgm/' + nomeImg + '.pgm'
-imagem_output = 'images/pgm_output/' + nomeImg + '_pywt.pgm'
+imagem_input = '../images/pgm/' + nomeImg + '.pgm'
+imagem_output = '../images/pgm_output/' + nomeImg + '_pywt.pgm'
 
 # carregar imagem
 img = cv2.imread(imagem_input, cv2.IMREAD_GRAYSCALE)
