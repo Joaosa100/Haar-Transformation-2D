@@ -3,11 +3,10 @@
 #include <math.h>
 #include <string.h>
 
-#define MAX_SIZE 512  // Tamanho máximo da imagem, defina de acordo com sua necessidade
+#define MAX_SIZE 90 // Tamanho máximo da imagem, defina de acordo com sua necessidade
 
-// Função para aplicar Transformação de Haar em uma dimensão
 void haarTransform1D(double data[], int length) {
-    double temp[MAX_SIZE];  // Usando um array estático para armazenar os dados temporários
+    double temp[MAX_SIZE];
     int half = length / 2;
 
     for (int i = 0; i < half; i++) {
@@ -20,15 +19,16 @@ void haarTransform1D(double data[], int length) {
     }
 }
 
-// Função para aplicar Transformação de Haar em duas dimensões
+
 void haarTransform2D(double matrix[MAX_SIZE][MAX_SIZE], int size) {
-    double temp[MAX_SIZE];  // Usando um array estático para armazenar os dados temporários
+    double temp[MAX_SIZE];
 
     // Transformação nas linhas
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
             temp[j] = matrix[i][j];
         }
+        // Aplicar a transformada de Haar 1D pelas linhas
         haarTransform1D(temp, size);
         for (int j = 0; j < size; j++) {
             matrix[i][j] = temp[j];
@@ -40,6 +40,7 @@ void haarTransform2D(double matrix[MAX_SIZE][MAX_SIZE], int size) {
         for (int i = 0; i < size; i++) {
             temp[i] = matrix[i][j];
         }
+        // Aplicar a transformada de Haar 1D pelas colunas
         haarTransform1D(temp, size);
         for (int i = 0; i < size; i++) {
             matrix[i][j] = temp[i];
@@ -47,7 +48,7 @@ void haarTransform2D(double matrix[MAX_SIZE][MAX_SIZE], int size) {
     }
 }
 
-// Função para ler uma imagem PGM P2
+
 void readPGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int *size) {
     FILE *file = fopen(filename, "r");
     if (!file) {
@@ -99,7 +100,7 @@ void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, 
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
             int val = (int)round(matrix[i][j]);
-            val = val < 0 ? 0 : (val > maxVal ? maxVal : val); // Limitar dentro do intervalo
+            val = val < 0 ? 0 : (val > maxVal ? maxVal : val); 
             fprintf(file, "%d ", val);
         }
         fprintf(file, "\n");
@@ -109,19 +110,19 @@ void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, 
 }
 
 int main() {
-    const char *inputFilename = "../images/barbara.pgm";
-    const char *outputFilename = "../compressedImages/baroutput.pgm";
+    const char *inputFilename = "../images/pgm/animal3.pgm";
+    const char *outputFilename = "../images/pgm_output/animal3.pgm";
 
     int size;
-    double image[MAX_SIZE][MAX_SIZE];  // Usando array estático para a imagem
+    double image[MAX_SIZE][MAX_SIZE];
 
     readPGM(inputFilename, image, &size);
 
-    printf("Imagem lida com sucesso. Aplicando Transformação de Haar...\n");
+    printf("Imagem lida com sucesso. Aplicando Transformacao de Haar...\n");
 
     haarTransform2D(image, size);
 
-    printf("Transformação de Haar concluída. Salvando resultado...\n");
+    printf("Transformacao de Haar concluida. Salvando resultado...\n");
 
     savePGM(outputFilename, image, size, 255);
 

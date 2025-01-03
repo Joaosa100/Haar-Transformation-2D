@@ -8,6 +8,7 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
+
       "cwd": "c:/Users/augus/Downloads/SEMB/projeto-semb/Haar-Transformation/work1",
       "program": "c:/Users/augus/Downloads/SEMB/projeto-semb/Haar-Transformation/work1/build/Debug/outDebug",
       "MIMode": "gdb",
