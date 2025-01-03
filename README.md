@@ -100,13 +100,13 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
 
       **Legenda:** Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 0 pixels no total de 2025 (45x45), totalizando 0.0% de erro utilizando uma tolerância de diferença zero.
 7. **Medição de consumo de RAM (a terminar)**
-   - Compile o código para gerar o executável da mesma maneira que fizemos para os testes:
+   - Compile o código para gerar o executável da mesma maneira que fizemos para os testes:<br>
    ```bash
    gcc -o myExec haar_transform.c -lm
    ``` 
-   - Para saber quanto de memória ram é necessária para rodar o código, usamos a seguinte linha de terminal no sistema Linux:
+   - Para saber quanto de memória ram é necessária para rodar o código, usamos a seguinte linha de terminal no sistema Linux:<br>
    ```bash
-   size <myName>
+   size <myExec>
    ```
    - Saída gerada:<br>
      ![ram](images/assets/improvedAlgorithmTest/ramCons.png)
