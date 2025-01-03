@@ -1,53 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
 
-#define MAX_SIZE 90 // Tamanho máximo da imagem, defina de acordo com sua necessidade
-
-void haarTransform1D(double data[], int length) {
-    double temp[MAX_SIZE];
-    int half = length / 2;
-
-    for (int i = 0; i < half; i++) {
-        temp[i] = (data[2 * i] + data[2 * i + 1]) / sqrt(2.0);
-        temp[half + i] = (data[2 * i] - data[2 * i + 1]) / sqrt(2.0);
-    }
-
-    for (int i = 0; i < length; i++) {
-        data[i] = temp[i];
-    }
-}
-
+#define MAX_SIZE 90
 
 void haarTransform2D(double matrix[MAX_SIZE][MAX_SIZE], int size) {
-    double temp[MAX_SIZE];
+    double temp[MAX_SIZE][MAX_SIZE];
+    int half = size / 2;
 
-    // Transformação nas linhas
+    // Copy input to temp
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            temp[j] = matrix[i][j];
-        }
-        // Aplicar a transformada de Haar 1D pelas linhas
-        haarTransform1D(temp, size);
-        for (int j = 0; j < size; j++) {
-            matrix[i][j] = temp[j];
+            temp[i][j] = matrix[i][j];
         }
     }
 
-    // Transformação nas colunas
-    for (int j = 0; j < size; j++) {
-        for (int i = 0; i < size; i++) {
-            temp[i] = matrix[i][j];
-        }
-        // Aplicar a transformada de Haar 1D pelas colunas
-        haarTransform1D(temp, size);
-        for (int i = 0; i < size; i++) {
-            matrix[i][j] = temp[i];
+    // Process 2x2 blocks directly (matches PyWavelets behavior)
+    for (int i = 0; i < half; i++) {
+        for (int j = 0; j < half; j++) {
+            double a = temp[2*i][2*j];
+            double b = temp[2*i][2*j+1];
+            double c = temp[2*i+1][2*j];
+            double d = temp[2*i+1][2*j+1];
+
+            // LL quadrant (top-left)
+            matrix[i][j] = (a + b + c + d) / 2.0;
+            
+            // HL quadrant (top-right)
+            matrix[i][j + half] = (a + b - c - d) / 2.0;
+            
+            // LH quadrant (bottom-left)
+            matrix[i + half][j] = (a - b + c - d) / 2.0;
+            
+            // HH quadrant (bottom-right)
+            matrix[i + half][j + half] = (a - b - c + d) / 2.0;
         }
     }
 }
-
 
 void readPGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int *size) {
     FILE *file = fopen(filename, "r");
@@ -75,17 +64,14 @@ void readPGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int *size)
     }
 
     *size = width;
-
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
             fscanf(file, "%lf", &matrix[i][j]);
         }
     }
-
     fclose(file);
 }
 
-// Função para salvar uma imagem PGM P2
 void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, int maxVal) {
     FILE *file = fopen(filename, "w");
     if (!file) {
@@ -99,33 +85,29 @@ void savePGM(const char *filename, double matrix[MAX_SIZE][MAX_SIZE], int size, 
 
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            int val = (int)round(matrix[i][j]);
-            val = val < 0 ? 0 : (val > maxVal ? maxVal : val); 
-            fprintf(file, "%d ", val);
+            // Match Python's np.clip() behavior
+            double val = matrix[i][j];
+            val = val < 0 ? 0 : (val > maxVal ? maxVal : val);
+            fprintf(file, "%d ", (int)val);
         }
         fprintf(file, "\n");
     }
-
     fclose(file);
 }
 
 int main() {
-    const char *inputFilename = "../images/pgm/animal3.pgm";
-    const char *outputFilename = "../images/pgm_output/animal3.pgm";
-
+    const char *inputFilename = "../images/pgm/pessoa1.pgm";
+    const char *outputFilename = "../images/pgm_output/pessoa1.pgm";
     int size;
     double image[MAX_SIZE][MAX_SIZE];
 
     readPGM(inputFilename, image, &size);
-
     printf("Imagem lida com sucesso. Aplicando Transformacao de Haar...\n");
 
     haarTransform2D(image, size);
 
     printf("Transformacao de Haar concluida. Salvando resultado...\n");
-
     savePGM(outputFilename, image, size, 255);
-
     printf("Arquivo salvo em '%s'.\n", outputFilename);
 
     return 0;
