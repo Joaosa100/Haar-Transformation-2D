@@ -34,9 +34,9 @@ def extract_45x45(img):
     return img[:45, :45]
 
 
-nome = 'animal3'
-pgm_file = '../images/pgm_output/' + nome + '_pywt.pgm'
-output_file = '../images/pgm_compressao/' + nome + '_pywt.pgm'
+nome = 'animal4'
+pgm_file = 'images/pgm_output/' + nome + '_pywt.pgm'
+output_file = 'images/pgm_compressao/' + nome + '_pywt.pgm'
 
 imagem = lerPGM(pgm_file)
 imagem_45x45 = extract_45x45(imagem)
