@@ -28,5 +28,5 @@ def pgm2jpeg(input_file, output_file):
     image.save(output_file, 'JPEG')
 
 # Exemplo de uso
-nome = 'animal3Imp'
-pgm2jpeg("../images/pgm_output/" + nome + ".pgm", "../images/assets/" + nome + ".jpeg")
+nome = 'animal4'
+pgm2jpeg("images/pgm_output_placa/" + nome + ".pgm", "images/pgm_output_placa/" + nome + ".jpeg")

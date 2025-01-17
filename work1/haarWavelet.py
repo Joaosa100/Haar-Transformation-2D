@@ -3,7 +3,7 @@ import pywt  # Biblioteca PyWavelets
 import numpy as np
 import matplotlib.pyplot as plt
 
-nomeImg = "animal4"
+nomeImg = "animal3"
 
 imagem_input = 'images/pgm/' + nomeImg + '.pgm'
 imagem_output = 'images/pgm_output/' + nomeImg + '_pywt.pgm'

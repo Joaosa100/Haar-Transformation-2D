@@ -181,7 +181,7 @@ def compararPGMs(path1, path2, tolerancia, path):
     
     return diferencas, quantidade_dif, porcentagem
 
-nome = 'animal4'
+nome = 'animal3'
 
 img1 = 'images/pgm_output_placa/' + nome + '.pgm'
 img2 = 'images/pgm_compressao/' + nome + '_pywt.pgm'
@@ -207,3 +207,4 @@ if isinstance(diferencas, np.ndarray):
     # Salvar e/ou exibir a imagem
     plt.savefig('diferencas_com_info.png', bbox_inches='tight')
     plt.show()
+
