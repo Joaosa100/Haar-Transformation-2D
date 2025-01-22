@@ -1,35 +1,85 @@
+/**
+ * @file haarTransform_placa.cpp
+ * @brief Implementação da Transformada de Haar 2D para compressão de imagens na Placa STM32 Núcleo-F030R8
+ * 
+ * @details Esta aplicação realiza a Transformada de Haar 2D em uma matriz declara no código 
+ * e retorna o resultado da transformação no terminal 
+ * 
+ * @copyright 
+ * Copyright (c) 2024 João Vitor Silva Assunção e Maria Augusta Sousa Rios.
+ * Todos os direitos reservados. Este código é parte de um projeto acadêmico apra a disciplina de
+ * Sistemas Embarcados do Instituto Federal de Educação, Ciência e Tecnologia do Ceará (IFCE).
+ * 
+ * @license MIT License
+ * Este projeto é distribuído sob os termos da MIT License. Consulte o arquivo LICENSE para mais detalhes.
+ * 
+ * @usage 
+ * Para usar esta aplicação há como requisito o uso de uma placa STM32 Nucleo-F030R8.
+ * 
+ * @authors
+ * João Vitor Silva Assunção
+ * Maria Augusta Sousa Rios
+ * 
+ * @date 2025-01-22
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ * @context 
+ * Trabalho de Sistemas Embarcados 
+ * Desenvolvimento de SW Embarcado
+ * Compressão de Imagens com Transformada de Haar 
+ * 
+ * @target
+ * Plataforma Alvo: Linux/Windows
+ */
+
 #include "mbed.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "stm32f0xx.h"
 
-#define IMAGE_SIZE 90
+#define IMAGE_SIZE 90 // Tamanho da matriz quadrada de entrada que representa uma imagem
 
-// Initialize serial interface
+// Inicializando a interface serial
 Serial pc(SERIAL_TX, SERIAL_RX);
-DigitalOut myled(LED1);
 
+/**
+ * @brief Realiza a Transformação de Haar 2D em uma imagem.
+ * 
+ * @param input Matriz de entrada contendo a imagem
+ */
 void haarTransform2d(const int input[][IMAGE_SIZE]) {
-    printf("Transform Result:\n");
     int col, row, sum;
+    printf("Resultado da Transformada:\n");
 
+    // percorre toda a imagem em blocos de 2x2
     for(row = 0; row < IMAGE_SIZE - 1; row = row + 2){
         for(col = 0; col < IMAGE_SIZE - 1 ; col = col + 2){
             sum = input[row][col] + input[row][col+1] + input[row+1][col] + input[row+1][col+1];        
             sum = sum / 2;
             sum = (sum < 0) ? 0 : ((sum > 255) ? 255 : sum);
+            // Printa o resultado do calculo
             printf("%4d ", sum);
         }
         printf("\n");
     }
 }
 
+/**
+ * @brief Função principal que executa a transformação de Haar em uma imagem PGM
+ * 
+ * É declarada uma matriz bidimensional, em que cada elemento representa um pixel da imagem em escala cinza (0 a 255).
+ * Esta matriz é enviada como parâmetro da função haarTransform2d e a partir dela serão feitos os calculos da transformada
+ * de Haar 2D
+ * 
+ * @return int 
+ */
 int main() {
     printf("Haar Transform - mbed OS 2\n");
 
-    // Image data defined in smaller chunks
+    // Definindo a matriz imagem
     static const int input_image[][IMAGE_SIZE] = {
-        // Your 90x90 image data here, define row by row
+        // Matriz Imagem 90 x 90
         {89, 89, 89, 90, 92, 92, 92, 91, 93, 94, 95, 97, 98, 97, 97, 98, 96, 96, 97, 98, 99, 100, 100, 100, 98, 97, 96, 94, 92, 90, 88, 87, 87, 86, 85, 85, 85, 85, 84, 83, 83, 83, 84, 84, 85, 86, 86, 87, 86, 85, 84, 84, 85, 85, 85, 84, 84, 83, 83, 82, 82, 81, 81, 80, 82, 82, 81, 81, 81, 81, 81, 81, 83, 83, 83, 84, 84, 84, 84, 84, 84, 84, 84, 83, 84, 84, 85, 85, 87, 88},
 {85, 86, 88, 89, 90, 89, 89, 88, 89, 89, 91, 93, 93, 92, 92, 94, 94, 95, 96, 97, 98, 99, 99, 99, 96, 95, 94, 92, 91, 89, 88, 88, 88, 87, 87, 87, 87, 86, 85, 84, 83, 84, 84, 84, 85, 85, 86, 86, 87, 86, 85, 85, 86, 86, 86, 86, 85, 84, 84, 83, 83, 82, 82, 81, 82, 82, 81, 81, 81, 82, 82, 82, 82, 82, 82, 82, 82, 83, 83, 83, 83, 82, 82, 82, 82, 82, 83, 84, 85, 85},
 {83, 85, 87, 88, 88, 87, 86, 85, 86, 86, 88, 89, 90, 89, 89, 91, 90, 91, 93, 94, 95, 96, 96, 95, 93, 93, 92, 91, 91, 90, 89, 89, 88, 88, 87, 87, 87, 87, 86, 85, 85, 85, 85, 86, 86, 86, 86, 86, 87, 86, 85, 85, 86, 86, 86, 86, 84, 84, 84, 83, 83, 82, 82, 82, 82, 82, 82, 82, 82, 82, 83, 83, 82, 82, 82, 82, 82, 82, 82, 82, 81, 81, 81, 80, 80, 81, 81, 82, 83, 83},
@@ -122,13 +172,13 @@ int main() {
 {132, 131, 127, 119, 129, 132, 133, 127, 127, 133, 129, 120, 108, 101, 105, 105, 113, 117, 119, 119, 125, 136, 144, 144, 138, 136, 123, 120, 115, 110, 121, 124, 118, 123, 125, 125, 122, 126, 134, 127, 126, 143, 141, 128, 128, 117, 117, 121, 129, 134, 123, 127, 130, 136, 140, 139, 138, 117, 121, 130, 109, 114, 113, 119, 136, 145, 147, 144, 124, 125, 117, 122, 117, 91, 115, 130, 121, 105, 122, 130, 124, 118, 128, 106, 102, 115, 112, 109, 108, 106}
     };
 
-    printf("Applying Haar Transform to %dx%d image...\n", IMAGE_SIZE, IMAGE_SIZE);
-    printf("Output size will be %dx%d\n", IMAGE_SIZE / 2, IMAGE_SIZE / 2);
+    printf("Aplicando a transformada em uma imagem de %dx%d ...\n", IMAGE_SIZE, IMAGE_SIZE);
+    printf("Saída será do tamanho %dx%d\n", IMAGE_SIZE / 2, IMAGE_SIZE / 2);
     
-    // Process and output directly
+    // Processo e realiza a transformada de Haar 2D
     haarTransform2d(input_image);
 
-    printf("Execution completed.\n");
+    printf("Execucao Completa.\n");
     
     while(true);
 }
