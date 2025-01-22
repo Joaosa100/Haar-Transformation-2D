@@ -1,5 +1,5 @@
 /**
- * @file haarTransform_placa.cpp
+ * @file haarTransformStm.cpp
  * @brief Implementação da Transformada de Haar 2D para compressão de imagens na Placa STM32 Núcleo-F030R8
  * 
  * @details Esta aplicação realiza a Transformada de Haar 2D em uma matriz declara no código 
@@ -43,33 +43,32 @@
 -- Date: Jan,10,2025
 -- Author: João Vitor Silva Assunção
 -- Motivo: Adição das bibliotecas "mbed.h" e "stm32f0xx.h" 
--------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
 -- #2.
 -- Date: Jan,13,2025
 -- Author: Maria Augusta Sousa Rios
 -- Motivo: Adicionada inicialização da interface serial
--------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
 -- #3.
 -- Date: Jan,13,2025
 -- Author: Maria Augusta Sousa Rios
 -- Motivo: Modificação dos nomes das estruturas e da estrutura do cálculo
--------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
 -- #4.
 -- Date: Jan,13,2025
 -- Author: João Vitor Silva Assunção
 -- Motivo: Adição de constrição do resultado logo após o cálculo
--------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
 -- #5.
 -- Date: Jan,13,2025
 -- Author: João vitor Silva Assunção
 -- Motivo: Adição da entrada (matriz de uma imagem PGM P2 90x90) na flash do microcontrolador
--------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
 -- #6.
 -- Date: Jan,15,2025
 -- Author: Maria Augusta Sousa Rios
--- Motivo: Modificação nas mensagens de comunicação do micro com o usuário e adição da chamada da função e limpeza do código
--------------------------------------------------------------------------------------------------------------------------
-
+-- Motivo: Modificação nas mensagens de comunicação do micro com o usuário, adição da chamada da função e limpeza do código
+-----------------------------------------------------------------------------------------------------------------------------------
 **/
 //By João: #1.
 #include "mbed.h"
