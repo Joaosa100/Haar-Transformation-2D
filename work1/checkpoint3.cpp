@@ -6,7 +6,7 @@
  * e retorna o resultado da transformação no terminal 
  * 
  * @copyright 
- * Copyright (c) 2024 João Vitor Silva Assunção e Maria Augusta Sousa Rios.
+ * Copyright (c) 2025 João Vitor Silva Assunção e Maria Augusta Sousa Rios.
  * Todos os direitos reservados. Este código é parte de um projeto acadêmico apra a disciplina de
  * Sistemas Embarcados do Instituto Federal de Educação, Ciência e Tecnologia do Ceará (IFCE).
  * 
@@ -15,6 +15,12 @@
  * 
  * @usage 
  * Para usar esta aplicação há como requisito o uso de uma placa STM32 Nucleo-F030R8.
+ * 
+ * @entry
+ * - Matriz 90x90 sendo o conteúdo de uma imagem PGM P2.
+ * 
+ * @output
+ * - Matriz 45x45 sendo o conteúdo de uma imagem PGM P2 comprimida pela Transformada de Haar.
  * 
  * @authors
  * João Vitor Silva Assunção
@@ -32,22 +38,60 @@
  * @target
  * Plataforma Alvo: Linux/Windows
  */
+/*----------------------------------------------------------------------------------------------------------------------------------------
+-- #1.
+-- Date: Jan,10,2025
+-- Author: João Vitor Silva Assunção
+-- Motivo: Adição das bibliotecas "mbed.h" e "stm32f0xx.h" 
+-------------------------------------------------------------------------------------------------------------------------
+-- #2.
+-- Date: Jan,13,2025
+-- Author: Maria Augusta Sousa Rios
+-- Motivo: Adicionada inicialização da interface serial
+-------------------------------------------------------------------------------------------------------------------------
+-- #3.
+-- Date: Jan,13,2025
+-- Author: Maria Augusta Sousa Rios
+-- Motivo: Modificação dos nomes das estruturas e da estrutura do cálculo
+-------------------------------------------------------------------------------------------------------------------------
+-- #4.
+-- Date: Jan,13,2025
+-- Author: João Vitor Silva Assunção
+-- Motivo: Adição de constrição do resultado logo após o cálculo
+-------------------------------------------------------------------------------------------------------------------------
+-- #5.
+-- Date: Jan,13,2025
+-- Author: João vitor Silva Assunção
+-- Motivo: Adição da entrada (matriz de uma imagem PGM P2 90x90) na flash do microcontrolador
+-------------------------------------------------------------------------------------------------------------------------
+-- #6.
+-- Date: Jan,15,2025
+-- Author: Maria Augusta Sousa Rios
+-- Motivo: Modificação nas mensagens de comunicação do micro com o usuário e adição da chamada da função e limpeza do código
+-------------------------------------------------------------------------------------------------------------------------
 
+**/
+//By João: #1.
 #include "mbed.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include "stm32f0xx.h"
+//End by João
+#include <stdio.h>
 
 #define IMAGE_SIZE 90 // Tamanho da matriz quadrada de entrada que representa uma imagem
 
+
+//By Maria: #2.
 // Inicializando a interface serial
 Serial pc(SERIAL_TX, SERIAL_RX);
+//End by Maria
 
 /**
  * @brief Realiza a Transformação de Haar 2D em uma imagem.
  * 
  * @param input Matriz de entrada contendo a imagem
  */
+
+//By Maria: #3.
 void haarTransform2d(const int input[][IMAGE_SIZE]) {
     int col, row, sum;
     printf("Resultado da Transformada:\n");
@@ -57,9 +101,12 @@ void haarTransform2d(const int input[][IMAGE_SIZE]) {
         for(col = 0; col < IMAGE_SIZE - 1 ; col = col + 2){
             sum = input[row][col] + input[row][col+1] + input[row+1][col] + input[row+1][col+1];        
             sum = sum / 2;
+//End by Maria
+//By João: #4.
             sum = (sum < 0) ? 0 : ((sum > 255) ? 255 : sum);
             // Printa o resultado do calculo
             printf("%4d ", sum);
+//End by João
         }
         printf("\n");
     }
@@ -75,8 +122,8 @@ void haarTransform2d(const int input[][IMAGE_SIZE]) {
  * @return int 
  */
 int main() {
+//By João #5
     printf("Haar Transform - mbed OS 2\n");
-
     // Definindo a matriz imagem
     static const int input_image[][IMAGE_SIZE] = {
         // Matriz Imagem 90 x 90
@@ -171,7 +218,9 @@ int main() {
 {126, 124, 120, 113, 124, 129, 131, 126, 126, 133, 129, 120, 109, 103, 108, 109, 115, 117, 116, 114, 120, 130, 133, 130, 133, 133, 122, 118, 111, 105, 118, 123, 118, 123, 126, 126, 123, 127, 132, 124, 119, 136, 135, 123, 124, 114, 115, 119, 131, 124, 108, 120, 121, 114, 115, 120, 128, 105, 110, 125, 108, 114, 112, 117, 134, 140, 140, 139, 122, 123, 114, 120, 110, 85, 113, 128, 116, 101, 122, 131, 130, 91, 91, 92, 103, 107, 100, 109, 103, 101},
 {132, 131, 127, 119, 129, 132, 133, 127, 127, 133, 129, 120, 108, 101, 105, 105, 113, 117, 119, 119, 125, 136, 144, 144, 138, 136, 123, 120, 115, 110, 121, 124, 118, 123, 125, 125, 122, 126, 134, 127, 126, 143, 141, 128, 128, 117, 117, 121, 129, 134, 123, 127, 130, 136, 140, 139, 138, 117, 121, 130, 109, 114, 113, 119, 136, 145, 147, 144, 124, 125, 117, 122, 117, 91, 115, 130, 121, 105, 122, 130, 124, 118, 128, 106, 102, 115, 112, 109, 108, 106}
     };
+//End by João
 
+//By Maria #6
     printf("Aplicando a transformada em uma imagem de %dx%d ...\n", IMAGE_SIZE, IMAGE_SIZE);
     printf("Saída será do tamanho %dx%d\n", IMAGE_SIZE / 2, IMAGE_SIZE / 2);
     
@@ -181,4 +230,5 @@ int main() {
     printf("Execucao Completa.\n");
     
     while(true);
+//End by Maria
 }
