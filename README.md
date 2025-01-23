@@ -378,7 +378,7 @@ O próprio Mbed, durante o build, faz a medição de memória do .elf antes de c
 
 Como toda a entrada foi definida no código, ela agora fica na flash **adicionando +32 Kb**
 
-Agora, o algoritmo precisa de **872 bytes** para ser executado (um acréscimo de + 168 bytes)
+Agora, o algoritmo precisa de **872 bytes** para ser executado (um acréscimo de **+168 bytes**)
 
 ---
 
