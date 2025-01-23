@@ -38,7 +38,8 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
    |----------------------|------------------|----------------------|
    | ![Imagem Original](images/assets/firstAlgorithmTest//animal3Source.jpeg) <br> `Animal_Source.pgm` | ![Haar Transformation - C](images/assets/firstAlgorithmTest/animal390.jpeg) <br> `Haar_C_result.pgm` | ![Haar Wavelet - Python](images/assets/firstAlgorithmTest/animal390_pywt.jpeg) <br> `Haar_Pywavelet_Result.pgm` |
 
-   - Usando o algoritmo para comparar cada pixel dos resultados:<br>
+   - Usando o algoritmo para comparar cada pixel dos resultados:
+     <br>
       ![Validacao - py](images/assets/firstAlgorithmTest/comp90er.png)
 
       **Legenda:** Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets). Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 892 pixels no total de 8100 (90x90), totalizando 11.01% de erro utilizando uma tolerância de diferença zero.
@@ -49,7 +50,8 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
    |----------------------|------------------|----------------------|
    | ![Imagem Original](images/assets/firstAlgorithmTest//animal3Source.jpeg) <br> `Animal_Source.pgm` | ![Haar Transformation - C](images/assets/firstAlgorithmTest/animal345.jpeg) <br> `Haar_C_result.pgm` | ![Haar Wavelet - Python](images/assets/firstAlgorithmTest/animal345_pywt.jpeg) <br> `Haar_Pywavelet_Result.pgm` |
 
-   - Usando o algoritmo para comparar cada pixel dos resultados:<br>
+   - Usando o algoritmo para comparar cada pixel dos resultados:
+     <br>
       ![Validacao - py](images/assets/firstAlgorithmTest/comp45er.png)
 
       **Legenda:** Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 87 pixels no total de 2025 (45x45), totalizando 4.3% de erro utilizando uma tolerância de diferença zero.
@@ -91,17 +93,19 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
          }
       }
    ```
-   - Assim, os resultados usando o [**haar_transform.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform.c) foram:<br>
+   - Assim, os resultados usando o [**haar_transform.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform.c) foram:
+   <br>
 
    | **Imagem Original** | **Resultado C** | **Resultado Python** |
    |----------------------|------------------|----------------------|
    | ![Imagem Original](images/assets/firstAlgorithmTest//animal3Source.jpeg) <br> `Animal_Source.pgm` | ![Haar Transformation - C](images/assets/improvedAlgorithmTest/animal3Imp.jpeg) <br> `Haar_C_result.pgm` | ![Haar Wavelet - Python](images/assets/firstAlgorithmTest/animal345_pywt.jpeg) <br> `Haar_Pywavelet_Result.pgm` |
 
-   - Usando o algoritmo para comparar cada pixel dos resultados:<br>
+   - Usando o algoritmo para comparar cada pixel dos resultados:
+     <br>
       ![Validacao - py](images/assets/improvedAlgorithmTest/comp45LL.png)
 
       **Legenda:** Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 0 pixels no total de 2025 (45x45), totalizando 0.0% de erro utilizando uma tolerância de diferença zero.
-2. **Medição de consumo de RAM**
+1. **Medição de consumo de RAM**
    - Compile o código para gerar o executável da mesma maneira que fizemos para os testes:<br>
    ```bash
    gcc -o myExec haar_transform.c -lm
@@ -362,7 +366,8 @@ Depois de tudo, este foi o resultado do teste de [**validacão**](https://github
    |----------------------|------------------|----------------------|
    | ![Imagem Original](images/assets/firstAlgorithmTest//animal3Source.jpeg) <br> `Animal_Source.pgm` | ![Haar Transformation - C](images/assets/improvedAlgorithmTest/animal3Imp.jpeg) <br> `Haar_Transform_STM.pgm` | ![Haar Wavelet - Python](images/assets/firstAlgorithmTest/animal345_pywt.jpeg) <br> `Haar_Pywavelet_Result.pgm` |
 
-   - Usando o algoritmo para comparar cada pixel dos resultados:<br>
+   - Usando o algoritmo para comparar cada pixel dos resultados:
+     <br>
       ![Validacao - py](images/assets/improvedAlgorithmTest/comp45LL.png)
 
       **Legenda:** Diferenças entre os resultados obtidos no algoritmo implementado em C para a placa e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 0 pixels no total de 2025 (45x45), totalizando 0.0% de erro utilizando uma tolerância de diferença zero.
