@@ -25,13 +25,13 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
 2. **Saída de Dados:**
    - Imagem comprimida para proporção 45x45 utilizando a Transformada 2D de Haar.
 3. **Implementação do algoritmo base:**
-   - O algoritmo implementado pode ser visualizado no arquivo [**haar_transformation.c**](https://github.com/seu-usuario/seu-repositorio/blob/main/caminho/haar_transform_stm.c).
+   - O algoritmo implementado pode ser visualizado no arquivo [**haar_transformation.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transformation.c).
    - Foram utilizadas as bibliotecas <stdio.h>, <stdlib.h>, <string.h> e <math.h>.
 4. **Complexidades:**
    - **Pior caso**: O(NxM), sendo N o número de linhas e M o número de colunas.
    - **Melhor caso**: O(NxM), sendo N o número de linhas e M o número de colunas, requer percorrer todos os elementos da imagem.
 5. **Primeiros Testes unitários para validar as transformações:**
-   - Nos testes realizados tivemos os seguintes resultados comparando as saídas dos algoritmos [**haar_transformation.c**](https://github.com/seu-usuario/seu-repositorio/blob/main/caminho/haar_transform_stm.c) com o [**haar_wavelet.py**](https://github.com/seu-usuario/seu-repositorio/blob/main/caminho/haar_transform_stm.c) usando o [**validacao.py**](https://github.com/seu-usuario/seu-repositorio/blob/main/caminho/haar_transform_stm.c):
+   - Nos testes realizados tivemos os seguintes resultados comparando as saídas dos algoritmos [**haar_transformation.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transformation.c) com o [**haar_wavelet.py**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/haarWavelet.py) usando o [**validacao.py**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/validacao.py):
 
    | **Imagem Original** | **Resultado C** | **Resultado Python** |
    |----------------------|------------------|----------------------|
@@ -54,7 +54,8 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
       **Legenda:** Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 87 pixels no total de 2025 (45x45), totalizando 4.3% de erro utilizando uma tolerância de diferença zero.
 
 6. **Melhorando o algoritmo:**
-   - Mesmo com uma leve diferença, era necessário atingir 100% de semelhança com a saída da Pywavelets, então modificamos o algoritmo.
+   - Mesmo com uma leve diferença, era necessário atingir 100% de semelhança com a saída da Pywavelets, então modificamos o algoritmo e o salvamos neste arquivo [**haar_transform.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform.c).
+   - Também salvamos uma versão com todas as sub-bandas de frequência em [**haar_all.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_all.c)
    - Retiramos a biblioteca <math.h>:
    ```c
       // Antes a função Haar2D chamava de forma iterativa a Haar1D:
@@ -89,7 +90,7 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
          }
       }
    ```
-   - Assim, os resultados foram:
+   - Assim, os resultados usando o [**haar_transform.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform.c) foram:
 
    | **Imagem Original** | **Resultado C** | **Resultado Python** |
    |----------------------|------------------|----------------------|
@@ -199,7 +200,7 @@ Após uma hora modificando o código e entendo melhor como funcionava a comunica
 ```c
 #include "stm32f0xx.h"
 ```
-Então, usamos a última hora para testar diretamente o código na placa. Como ainda estávamos aprendendo a mexer, optamos por usar imagens menores para não estourar a memória RAM da placa. Nisso, chegamos ao primeiro código que batizamos de [**Checkpoint 1**](https://github.com/seu-usuario/seu-repositorio/blob/main/caminho/haar_transform_stm.c), pois nem loucos que deixaríamos este ser o código final.
+Então, usamos a última hora para testar diretamente o código na placa. Como ainda estávamos aprendendo a mexer, optamos por usar imagens menores para não estourar a memória RAM da placa. Nisso, chegamos ao primeiro código que batizamos de [**Checkpoint 1**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/checkpoint1.cpp), pois nem loucos que deixaríamos este ser o código final.
 
 ```c
 // Define parameters
@@ -260,7 +261,7 @@ Hoje era um dia diferente, pois era o dia de **demonstrar o funcionamento do có
 Estávamos muito pressionados com isso, mas como éramos a última equipe a demonstrar o código, tiramos vantagem disso.
 
 ### ==> Checkpoint 2
-Após uma hora e meia modificando o código e testando, percebemos algumas coisas que poderiam ser melhoradas no código para atingir os 8000 inteiros de entrada. Então, conseguimos o [**Checkpoint 2**](https://github.com/seu-usuario/seu-repositorio/blob/main/caminho/haar_transform_stm.c)., mas só tivemos pouco tempo para comentar algumas partes e facilitar a leitura para o professor antes de demonstrá-lo (ele pedia isso pois avaliava mais de 10 códigos diferentes no mesmo dia).
+Após uma hora e meia modificando o código e testando, percebemos algumas coisas que poderiam ser melhoradas no código para atingir os 8000 inteiros de entrada. Então, conseguimos o [**Checkpoint 2**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/checkpoint2.cpp)., mas só tivemos pouco tempo para comentar algumas partes e facilitar a leitura para o professor antes de demonstrá-lo (ele pedia isso pois avaliava mais de 10 códigos diferentes no mesmo dia).
 
 ```c
 // Define small block size for processing
@@ -316,7 +317,7 @@ Conseguimos atingir o objetivo principal de consumir 8000 inteiros de entrada co
 ### 🧹 Quarto dia - O código final para a placa
 O pior já havia passado, agora precisávamos limpar o código e remover o BLOCK_SIZE.
 
-Começamos analisando nossas outras tentativas e revisando a metodologia de cálculo. Como o código só percorre a entrada e já faz o cálculo, precisamos apenas percorrer a quantidade suficiente para coletar os índices para o cálculo. Então, precisávamos apenas de 2 FORs e retiramos o BLOCK_SIZE, pois não precisava fragmentar a entrada, mas sim só percorrer o tanto que precisávamos por vez. Assim, após limparmos o código e adicionarmos algumas mensagens de funcionamento, batizamos este último código desta etapa de [**haar_transform_stm.c**](https://github.com/seu-usuario/seu-repositorio/blob/main/caminho/haar_transform_stm.c).
+Começamos analisando nossas outras tentativas e revisando a metodologia de cálculo. Como o código só percorre a entrada e já faz o cálculo, precisamos apenas percorrer a quantidade suficiente para coletar os índices para o cálculo. Então, precisávamos apenas de 2 FORs e retiramos o BLOCK_SIZE, pois não precisava fragmentar a entrada, mas sim só percorrer o tanto que precisávamos por vez. Assim, após limparmos o código e adicionarmos algumas mensagens de funcionamento, batizamos este último código desta etapa de [**haar_transform_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_stm.cpp).
 
 
 ```c
@@ -354,7 +355,7 @@ void haarTransform2d(const int input[][IMAGE_SIZE]) {
 > Com calma revisamos e limpamos bastante o código, inclusive ficou bem mais fácil de lê-lo.
 
 ### Resultado da demonstração
-Depois de tudo, este foi o resultado do teste de validação do [**haar_transform_stm.c**](https://github.com/seu-usuario/seu-repositorio/blob/main/caminho/haar_transform_stm.c) com o [**haar_wavelet.py**](https://github.com/seu-usuario/seu-repositorio/blob/main/caminho/haar_transform_stm.c)
+Depois de tudo, este foi o resultado do teste de [**validacão**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/validacao.py) do [**haar_transform_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_stm.cpp) com o [**haar_wavelet.py**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/haarWavelet.py)
 
    | **Imagem Original** | **Resultado C** | **Resultado Python** |
    |----------------------|------------------|----------------------|
