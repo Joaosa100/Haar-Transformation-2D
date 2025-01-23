@@ -7,52 +7,25 @@
 #include <locale.h>
 #include "stm32f0xx.h"
 
-// Define smaller block size for processing
-#define BLOCK_SIZE 10    // Reduced from 30 to 10
-#define OUTPUT_BLOCK_SIZE 5  // Half of BLOCK_SIZE
+// Define small block size for processing
+#define BLOCK_SIZE 10 
 #define IMAGE_SIZE 90
-#define IMAGE_OUTPUT_SIZE 45
 
 // Initialize serial interface
 Serial pc(SERIAL_TX, SERIAL_RX);
-DigitalOut myled(LED1);
-
-// Process a small block and output directly
-void processBlock(const int input[][IMAGE_SIZE], int startRow, int startCol) {
-    for (int i = 0; i < OUTPUT_BLOCK_SIZE; i++) {
-        for (int j = 0; j < OUTPUT_BLOCK_SIZE; j++) {
-            int baseRow = startRow + (2*i);
-            int baseCol = startCol + (2*j);
-            
-            // Calculate sum and average for current 2x2 block
-            int sum = input[baseRow][baseCol] +
-                     input[baseRow][baseCol+1] +
-                     input[baseRow+1][baseCol] +
-                     input[baseRow+1][baseCol+1];
-            
-            int val = sum / 2;
-            // Clamp values
-            val = (val < 0) ? 0 : ((val > 255) ? 255 : val);
-            
-            // Print result directly
-            printf("%4d ", val);
-        }
-        printf("\n");
-    }
-}
 
 // Process image in small blocks
-void processImage(const int input[][IMAGE_SIZE]) {
+void haarTransform2D(const int input[][IMAGE_SIZE]) {
     printf("Transform Result:\n");
     
     // Process each block
     for (int blockRow = 0; blockRow < IMAGE_SIZE; blockRow += BLOCK_SIZE) {
         // Need to combine multiple row outputs
-        for (int subRow = 0; subRow < OUTPUT_BLOCK_SIZE; subRow++) {
+        for (int subRow = 0; subRow < BLOCK_SIZE/2; subRow++) {
             // Process each block in this row
             for (int blockCol = 0; blockCol < IMAGE_SIZE; blockCol += BLOCK_SIZE) {
                 int baseRow = blockRow + (2 * subRow);
-                for (int j = 0; j < OUTPUT_BLOCK_SIZE; j++) {
+                for (int j = 0; j < BLOCK_SIZE/2; j++) {
                     int baseCol = blockCol + (2 * j);
                     
                     // Process single 2x2 block
@@ -170,10 +143,10 @@ int main() {
     };
 
     printf("Applying Haar Transform to %dx%d image...\n", IMAGE_SIZE, IMAGE_SIZE);
-    printf("Output size will be %dx%d\n", IMAGE_OUTPUT_SIZE, IMAGE_OUTPUT_SIZE);
+    printf("Output size will be %dx%d\n", IMAGE_SIZE/2, IMAGE_SIZE/2);
     
     // Process and output directly
-    processImage(input_image);
+    haarTransform2D(input_image);
 
     printf("Execution completed.\n");
     

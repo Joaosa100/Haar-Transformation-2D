@@ -9,17 +9,15 @@
 
 // Define parameters
 #define MAX_SIZE 40
-#define IMAGE_SIZE 40  // Now we can use 90x90
+#define IMAGE_SIZE 40
 
 // Initialize serial interface
 Serial pc(SERIAL_TX, SERIAL_RX);
 
-DigitalOut myled(LED1);
-
 // Function to perform 2D Haar transform (LL coefficients only)
 void haarTransform2D(const int input[MAX_SIZE][MAX_SIZE], int output[MAX_SIZE][MAX_SIZE], int input_size, int *output_size) {
     int half = input_size / 2;
-    *output_size = half;  // Will be 45x45 for 90x90 input
+    *output_size = half;
 
     // Calculate only LL coefficients
     for (int i = 0; i < half; i++) {
@@ -38,7 +36,6 @@ void haarTransform2D(const int input[MAX_SIZE][MAX_SIZE], int output[MAX_SIZE][M
 // Function to print the transformation result
 void printResult(int matrix[MAX_SIZE][MAX_SIZE], int size) {
     printf("Transformation Result (showing first few elements):\n");
-    // Print first few elements as example (adjust range as needed)
     for (int i = 0; i < 20; i++) {
         for (int j = 0; j < 20; j++) {
             int val = matrix[i][j];
@@ -48,7 +45,6 @@ void printResult(int matrix[MAX_SIZE][MAX_SIZE], int size) {
         }
         printf("\n");
     }
-    //printf("... (matrix continues, size is %dx%d)\n", size, size);
 }
 
 int main() {
@@ -99,8 +95,8 @@ int main() {
 {0, 19, 5, 2, 4, 0, 9, 0, 1, 3, 1, 1, 12, 13, 3, 1, 8, 6, 3, 1, 1, 1, 3, 4, 6, 9, 1, 5, 6, 0, 8, 4, 0, 29, 0, 0, 11, 1, 6, 0}
     };
 
-    int input_size = IMAGE_SIZE;  // 90
-    int output_size;              // Will be 45
+    int input_size = IMAGE_SIZE;  // 90x90
+    int output_size;              // 45x45
     int output_image[MAX_SIZE][MAX_SIZE] = {0};
 
     printf("Applying Haar Transform to %dx%d image...\n", input_size, input_size);
