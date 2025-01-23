@@ -32,6 +32,7 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
    - **Melhor caso**: O(NxM), sendo N o número de linhas e M o número de colunas, requer percorrer todos os elementos da imagem.
 5. **Primeiros Testes unitários para validar as transformações:**
    - Nos testes realizados tivemos os seguintes resultados comparando as saídas dos algoritmos [**haar_transformation.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transformation.c) com o [**haar_wavelet.py**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/haarWavelet.py) usando o [**validacao.py**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/validacao.py):
+   <br>
 
    | **Imagem Original** | **Resultado C** | **Resultado Python** |
    |----------------------|------------------|----------------------|
@@ -53,10 +54,10 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
 
       **Legenda:** Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 87 pixels no total de 2025 (45x45), totalizando 4.3% de erro utilizando uma tolerância de diferença zero.
 
-6. **Melhorando o algoritmo:**
+1. **Melhorando o algoritmo:**
    - Mesmo com uma leve diferença, era necessário atingir 100% de semelhança com a saída da Pywavelets, então modificamos o algoritmo e o salvamos neste arquivo [**haar_transform.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform.c).
    - Também salvamos uma versão com todas as sub-bandas de frequência em [**haar_all.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_all.c)
-   - Retiramos a biblioteca <math.h>:
+   - Retiramos a biblioteca <math.h>:<br>
    ```c
       // Antes a função Haar2D chamava de forma iterativa a Haar1D:
       void haarTransform1D(double data[], int length) {
@@ -90,7 +91,7 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
          }
       }
    ```
-   - Assim, os resultados usando o [**haar_transform.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform.c) foram:
+   - Assim, os resultados usando o [**haar_transform.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform.c) foram:<br>
 
    | **Imagem Original** | **Resultado C** | **Resultado Python** |
    |----------------------|------------------|----------------------|
@@ -100,7 +101,7 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
       ![Validacao - py](images/assets/improvedAlgorithmTest/comp45LL.png)
 
       **Legenda:** Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 0 pixels no total de 2025 (45x45), totalizando 0.0% de erro utilizando uma tolerância de diferença zero.
-7. **Medição de consumo de RAM**
+2. **Medição de consumo de RAM**
    - Compile o código para gerar o executável da mesma maneira que fizemos para os testes:<br>
    ```bash
    gcc -o myExec haar_transform.c -lm
