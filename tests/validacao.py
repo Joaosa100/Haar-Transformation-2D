@@ -49,9 +49,9 @@ def compararPGMs(path1, path2, tolerancia, path):
 
 nome = 'animal3'
 
-img1 = 'images/pgm_output_placa/' + nome + '.pgm'
-img2 = 'images/pgm_compressao/' + nome + '_pywt.pgm'
-pgm_comparacao = 'images/pgm_comparacao/' + nome + '.pgm'
+img1 = '../images/pgm_output_placa/' + nome + '.pgm'
+img2 = '../images/pgm_compressao/' + nome + '_pywt.pgm'
+pgm_comparacao = '../images/pgm_comparacao/' + nome + '.pgm'
 
 tolerancia = 0
 diferencas, quantidade_dif, porcentagem = compararPGMs(img1, img2, tolerancia, pgm_comparacao)
