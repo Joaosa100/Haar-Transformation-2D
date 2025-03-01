@@ -10,8 +10,7 @@ void haarTransform2d(const int input[][IMAGE_SIZE]) {
     //printf("Resultado da Transformada:\n");
     for(row = 0; row < IMAGE_SIZE - 1; row = row + 2){
         for(col = 0; col < IMAGE_SIZE - 1 ; col = col + 2){
-            sum = (input[row][col] + input[row][col+1] + 
-                input[row+1][col] + input[row+1][col+1]) >> 1;
+            sum = (input[row][col] + input[row][col+1] + input[row+1][col] + input[row+1][col+1]) >> 1;
             sum = (sum > 255) ? 255 : sum;
             //printf("%4d ", sum);
         }
