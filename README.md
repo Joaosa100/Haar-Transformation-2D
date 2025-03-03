@@ -385,9 +385,10 @@ Agora, o algoritmo precisa de **872 bytes** para ser executado (um acréscimo de
 
 ## Parte 3: Análise e otimização
 ### 🎯 Objetivo
-1. Com o algoritmo funcionando corretamente no PC e na placa STM32-F030R8, devemos otimizá-lo no consumo de memória ou em tempo de computação;
-2. Efetuar medições de parâmetros (tempo e memória) de uma aplicação embarcada em diferentes plataformas;
-3. Efetuar medições de corrente e tensão em uma plataforma embarcada;
+Após validar o funcionamento do algoritmo no PC e na plataforma embarcada (STM32-F030R8), o próximo passo é avaliar e melhorar seu desempenho, considerando:
+1. **Medições de desempenho** 📊: Analisar tempo de execução, uso de memória e consumo de energia (quando aplicável);  
+2. **Otimização do código** 🚀: Implementar melhorias focadas na redução de tempo de computação ou uso de memória na STM32.
+3. **Comparação entre plataformas** 🔄: Observar diferenças entre o ambiente PC e a plataforma embarcada quanto às medições antes e após a otimização realizada;  
 
 ### 🛠 Tecnologias Utilizadas
 - Linguagem de programação: C, Python e C++
@@ -398,9 +399,22 @@ Agora, o algoritmo precisa de **872 bytes** para ser executado (um acréscimo de
 - IDE/Editor: Keil Studio Cloud
 - Compilador/Interprete: GCC, Python 3.8+, G++ (Keil Studio Cloud)
 
-### Como devem ser as medições:
+### 📏 Como serão realizadas as medições?  
+As medições devem ser feitas sob as mesmas condições para ambas as plataformas (PC e STM32), garantindo comparabilidade. Os parâmetros analisados serão:  
 
-### Como deve ser a otimização:
+#### 🖥️ Para ambas as plataformas (PC e STM32):  
+1. **⏱️ Tempo de computação** – Apenas do algoritmo, excluindo partes de I/O, geração de dados e impressão;  
+2. **📦 Memória de código** – Espaço ocupado pelo código da aplicação, sem considerar dados de entrada;  
+3. **🗄️ Memória de dados** – Espaço ocupado pelos dados manipulados pela aplicação.  
+
+#### 🔋 Exclusivamente para a plataforma embarcada (STM32):  
+4. **⚡ Energia consumida** – Medição de corrente e tensão durante a execução.
+
+### 🚀 Como será feita a otimização?  
+1. Escolher **UM** dos parâmetros analisados na STM32 para otimizar: **tempo de computação OU uso de memória**;  
+2. Implementar otimizações exclusivamente na parte do código que **implementa o algoritmo** (sem alterar entrada de dados ou saída de resultados);  
+3. Repetir as medições para verificar o impacto da otimização.  
+
 
 ## 👥 Colaboradores
 
