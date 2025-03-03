@@ -5,6 +5,7 @@ Usando a Transformada 2D de Haar para comprimir imagens PGM P2
 Este projeto desenvolvido durante a cadeira de Sistemas Embarcados foi dividido em 2 partes:
 1. Projetar o algoritmo de forma correta, indicando entrada/saída de dados, complexidades e construir e definir os testes para que tudo seja executado em um PC.
 2. Transportar o algoritmo para um sistema embarcado fazendo as devidas alterações e gestão de memória.
+3. Propor e implementar otimização em uma aplicação embarcada visando a reduzir tempo de computação ou memória. 
 
 ## Parte 1: Algoritmo no Ambiente PC
 ### 🎯 Objetivo
@@ -382,8 +383,24 @@ Agora, o algoritmo precisa de **872 bytes** para ser executado (um acréscimo de
 
 ---
 
-## Parte 3
-Em breve
+## Parte 3: Análise e otimização
+### 🎯 Objetivo
+1. Com o algoritmo funcionando corretamente no PC e na placa STM32-F030R8, devemos otimizá-lo no consumo de memória ou em tempo de computação;
+2. Efetuar medições de parâmetros (tempo e memória) de uma aplicação embarcada em diferentes plataformas;
+3. Efetuar medições de corrente e tensão em uma plataforma embarcada;
+
+### 🛠 Tecnologias Utilizadas
+- Linguagem de programação: C, Python e C++
+- Ferramentas de teste: Transformada de Haar usando a biblioteca Pywavelets
+
+### 🌐 Ambiente de Desenvolvimento
+- Sistema Operacional: PopOS 22.04 LTS e Windows 10
+- IDE/Editor: Keil Studio Cloud
+- Compilador/Interprete: GCC, Python 3.8+, G++ (Keil Studio Cloud)
+
+### Como devem ser as medições:
+
+### Como deve ser a otimização:
 
 ## 👥 Colaboradores
 
