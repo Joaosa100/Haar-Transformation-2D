@@ -1,10 +1,70 @@
+/**
+ * @file haar_transform_2d_stm_optimized_chrono.cpp
+ * @brief Implementação da Transformada de Haar 2D para compressão de imagens na Placa STM32 Núcleo-F030R8 com medição de tempo com a biblioteca Chrono
+ * 
+ * @details Esta aplicação realiza a Transformada de Haar 2D em uma matriz declara no código 
+ * e retorna o resultado da transformação no terminal 
+ * 
+ * @copyright 
+ * Copyright (c) 2025 João Vitor Silva Assunção e Maria Augusta Sousa Rios.
+ * Todos os direitos reservados. Este código é parte de um projeto acadêmico apra a disciplina de
+ * Sistemas Embarcados do Instituto Federal de Educação, Ciência e Tecnologia do Ceará (IFCE).
+ * 
+ * @license MIT License
+ * Este projeto é distribuído sob os termos da MIT License. Consulte o arquivo LICENSE para mais detalhes.
+ * 
+ * @usage 
+ * Para usar esta aplicação há como requisito o uso de uma placa STM32 Nucleo-F030R8.
+ * 
+ * @entry
+ * - Matriz 90x90 sendo o conteúdo de uma imagem PGM P2.
+ * 
+ * @output
+ * - Matriz 45x45 sendo o conteúdo de uma imagem PGM P2 comprimida pela Transformada de Haar.
+ * 
+ * @authors
+ * João Vitor Silva Assunção
+ * Maria Augusta Sousa Rios
+ * 
+ * @date 2025-02-20
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ * @context 
+ * Trabalho de Sistemas Embarcados 
+ * Desenvolvimento de SW Embarcado
+ * Compressão de Imagens com Transformada de Haar 
+ * 
+ * @target
+ * Plataforma Alvo: Linux/Windows
+ */
+/*----------------------------------------------------------------------------------------------------------------------------------------
+-- #1.
+-- Date: Fev,20,2025
+-- Author: João Vitor Silva Assunção
+-- Motivo: Remoção de I/Os e loops para medição de tempo 
+-----------------------------------------------------------------------------------------------------------------------------------
+-- #2.
+-- Date: Fev,20,2025
+-- Author: Maria Augusta Sousa Rios
+-- Motivo: Adição das bibliotecas <iostream>, <chrono> e <iomanip>
+-----------------------------------------------------------------------------------------------------------------------------------
+-- #3.
+-- Date: Fev,20,2025
+-- Author: Maria Augusta Sousa Rios
+-- Motivo: Adição de medição de tempo pela biblioteca chrono
+-----------------------------------------------------------------------------------------------------------------------------------
+**/
+
 //#include "mbed.h"
 //#include "stm32f0xx.h"
+//By Maria: #2
 #include <iostream>
 #include <chrono>
 #include <iomanip>
 
 using namespace std;
+//End by Maria
 
 #define IMAGE_SIZE 90
 
@@ -12,6 +72,7 @@ using namespace std;
 
 void haarTransform2d(const int input[][IMAGE_SIZE]) {
     int col, row, sum;
+//By João: #1
     //printf("Resultado da Transformada:\n");
     for(row = 0; row < IMAGE_SIZE - 1; row = row + 2){
         for(col = 0; col < IMAGE_SIZE - 1 ; col = col + 2){
@@ -26,8 +87,8 @@ void haarTransform2d(const int input[][IMAGE_SIZE]) {
 int main() {
     //printf("Haar Transform - mbed OS 2\n");
     static const int input_image[][IMAGE_SIZE] = {
-        {89, 89, 0, 0, 92, 92, 92, 91, 93, 94, 95, 97, 98, 97, 97, 98, 96, 96, 97, 98, 99, 100, 100, 100, 98, 97, 96, 94, 92, 90, 88, 87, 87, 86, 85, 85, 85, 85, 84, 83, 83, 83, 84, 84, 85, 86, 86, 87, 86, 85, 84, 84, 85, 85, 85, 84, 84, 83, 83, 82, 82, 81, 81, 80, 82, 82, 81, 81, 81, 81, 81, 81, 83, 83, 83, 84, 84, 84, 84, 84, 84, 84, 84, 83, 84, 84, 85, 85, 87, 88},
-        {85, 86, 0, 0, 90, 89, 89, 88, 89, 89, 91, 93, 93, 92, 92, 94, 94, 95, 96, 97, 98, 99, 99, 99, 96, 95, 94, 92, 91, 89, 88, 88, 88, 87, 87, 87, 87, 86, 85, 84, 83, 84, 84, 84, 85, 85, 86, 86, 87, 86, 85, 85, 86, 86, 86, 86, 85, 84, 84, 83, 83, 82, 82, 81, 82, 82, 81, 81, 81, 82, 82, 82, 82, 82, 82, 82, 82, 83, 83, 83, 83, 82, 82, 82, 82, 82, 83, 84, 85, 85},
+        {89, 89, 89, 90, 92, 92, 92, 91, 93, 94, 95, 97, 98, 97, 97, 98, 96, 96, 97, 98, 99, 100, 100, 100, 98, 97, 96, 94, 92, 90, 88, 87, 87, 86, 85, 85, 85, 85, 84, 83, 83, 83, 84, 84, 85, 86, 86, 87, 86, 85, 84, 84, 85, 85, 85, 84, 84, 83, 83, 82, 82, 81, 81, 80, 82, 82, 81, 81, 81, 81, 81, 81, 83, 83, 83, 84, 84, 84, 84, 84, 84, 84, 84, 83, 84, 84, 85, 85, 87, 88},
+{85, 86, 88, 89, 90, 89, 89, 88, 89, 89, 91, 93, 93, 92, 92, 94, 94, 95, 96, 97, 98, 99, 99, 99, 96, 95, 94, 92, 91, 89, 88, 88, 88, 87, 87, 87, 87, 86, 85, 84, 83, 84, 84, 84, 85, 85, 86, 86, 87, 86, 85, 85, 86, 86, 86, 86, 85, 84, 84, 83, 83, 82, 82, 81, 82, 82, 81, 81, 81, 82, 82, 82, 82, 82, 82, 82, 82, 83, 83, 83, 83, 82, 82, 82, 82, 82, 83, 84, 85, 85},
 {83, 85, 87, 88, 88, 87, 86, 85, 86, 86, 88, 89, 90, 89, 89, 91, 90, 91, 93, 94, 95, 96, 96, 95, 93, 93, 92, 91, 91, 90, 89, 89, 88, 88, 87, 87, 87, 87, 86, 85, 85, 85, 85, 86, 86, 86, 86, 86, 87, 86, 85, 85, 86, 86, 86, 86, 84, 84, 84, 83, 83, 82, 82, 82, 82, 82, 82, 82, 82, 82, 83, 83, 82, 82, 82, 82, 82, 82, 82, 82, 81, 81, 81, 80, 80, 81, 81, 82, 83, 83},
 {85, 86, 86, 87, 88, 87, 85, 83, 85, 85, 86, 87, 87, 87, 88, 89, 89, 90, 91, 92, 93, 94, 95, 95, 93, 93, 92, 92, 92, 91, 91, 91, 91, 90, 90, 90, 90, 90, 89, 88, 88, 88, 88, 88, 88, 88, 88, 88, 87, 87, 86, 86, 87, 87, 87, 87, 85, 85, 85, 84, 84, 83, 83, 83, 82, 82, 82, 82, 82, 83, 83, 83, 83, 83, 83, 82, 82, 82, 82, 82, 81, 81, 80, 80, 80, 80, 80, 81, 82, 82},
 {88, 87, 86, 86, 87, 86, 84, 81, 82, 82, 83, 84, 84, 83, 84, 86, 90, 90, 91, 91, 93, 94, 96, 97, 94, 94, 94, 94, 94, 94, 93, 93, 95, 94, 94, 95, 95, 95, 94, 93, 91, 91, 91, 91, 91, 91, 91, 91, 91, 90, 89, 89, 89, 90, 89, 89, 89, 88, 88, 87, 87, 86, 86, 86, 84, 84, 84, 84, 83, 84, 84, 84, 84, 84, 83, 83, 82, 82, 81, 81, 80, 80, 79, 79, 79, 79, 79, 79, 81, 81},
@@ -120,7 +181,7 @@ int main() {
 
     //printf("Aplicando a transformada em uma imagem de %dx%d ...\n", IMAGE_SIZE, IMAGE_SIZE);
     //printf("Saída será do tamanho %dx%d\n", IMAGE_SIZE / 2, IMAGE_SIZE / 2);
-
+//By Maria: #3
     auto start = chrono::high_resolution_clock::now();
 
     haarTransform2d(input_image);
@@ -129,9 +190,10 @@ int main() {
 
     chrono::duration<double> tempo_execucao = end - start;
     cout << fixed << setprecision(6) << "Tempo de execução da Transformação de Haar: " << tempo_execucao.count() << " segundos" << endl;
-
+//End by Maria
     //printf("Execucao Completa.\n");
     
     //while(true);
     //for(;;);
+//End by João
 }

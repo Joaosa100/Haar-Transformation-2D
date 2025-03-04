@@ -1,3 +1,56 @@
+/**
+ * @file haar_transform_2d_stm_timer.cpp
+ * @brief Implementação da Transformada de Haar 2D para compressão de imagens na Placa STM32 Núcleo-F030R8 com medição de tempo da API MBED
+ * 
+ * @details Esta aplicação realiza a Transformada de Haar 2D em uma matriz declara no código 
+ * e retorna o resultado da transformação no terminal 
+ * 
+ * @copyright 
+ * Copyright (c) 2025 João Vitor Silva Assunção e Maria Augusta Sousa Rios.
+ * Todos os direitos reservados. Este código é parte de um projeto acadêmico apra a disciplina de
+ * Sistemas Embarcados do Instituto Federal de Educação, Ciência e Tecnologia do Ceará (IFCE).
+ * 
+ * @license MIT License
+ * Este projeto é distribuído sob os termos da MIT License. Consulte o arquivo LICENSE para mais detalhes.
+ * 
+ * @usage 
+ * Para usar esta aplicação há como requisito o uso de uma placa STM32 Nucleo-F030R8.
+ * 
+ * @entry
+ * - Matriz 90x90 sendo o conteúdo de uma imagem PGM P2.
+ * 
+ * @output
+ * - Matriz 45x45 sendo o conteúdo de uma imagem PGM P2 comprimida pela Transformada de Haar.
+ * 
+ * @authors
+ * João Vitor Silva Assunção
+ * Maria Augusta Sousa Rios
+ * 
+ * @date 2025-02-17
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ * @context 
+ * Trabalho de Sistemas Embarcados 
+ * Desenvolvimento de SW Embarcado
+ * Compressão de Imagens com Transformada de Haar 
+ * 
+ * @target
+ * Plataforma Alvo: Linux/Windows
+ */
+/*----------------------------------------------------------------------------------------------------------------------------------------
+-- #1.
+-- Date: Fev,17,2025
+-- Author: João Vitor Silva Assunção
+-- Motivo: Remoção de I/Os e loops para medição de tempo 
+-----------------------------------------------------------------------------------------------------------------------------------
+-- #2.
+-- Date: Fev,17,2025
+-- Author: Maria Augusta Sousa Rios
+-- Motivo: Adição de medição de tempo pela API MBED
+-----------------------------------------------------------------------------------------------------------------------------------
+**/
+
 #include "mbed.h"
 #include "stm32f0xx.h"
 #include <stdio.h>
@@ -8,6 +61,7 @@
 Serial pc(SERIAL_TX, SERIAL_RX);
 
 void haarTransform2d(const int input[][IMAGE_SIZE]) {
+//By João: #1
     //printf("Transform Result:\n");
     int col, row, sum;
     for(row = 0; row < IMAGE_SIZE - 1; row = row + 2){
@@ -120,16 +174,17 @@ int main() {
 
     //printf("Applying Haar Transform to %dx%d image...\n", IMAGE_SIZE, IMAGE_SIZE);
     //printf("Output size will be %dx%d\n", IMAGE_SIZE / 2, IMAGE_SIZE / 2);
-    
+//By Maria: #2
     Timer time;
     time.start();
     haarTransform2d(input_image);
     time.stop();
     printf("Tempo de execucao: %d us\n", time.read_us());
-    
+//End by Maria
     
     //printf("Execution completed.\n");
     
     //while(true);
-    for(;;);
+    //for(;;);
+//End by João
 }

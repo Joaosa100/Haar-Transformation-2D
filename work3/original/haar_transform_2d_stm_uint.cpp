@@ -1,3 +1,56 @@
+/**
+ * @file haar_transform_2d_stm_uint.cpp
+ * @brief Implementação da Transformada de Haar 2D para compressão de imagens na Placa STM32 Núcleo-F030R8 usando uints
+ * 
+ * @details Esta aplicação realiza a Transformada de Haar 2D em uma matriz declara no código 
+ * e retorna o resultado da transformação no terminal 
+ * 
+ * @copyright 
+ * Copyright (c) 2025 João Vitor Silva Assunção e Maria Augusta Sousa Rios.
+ * Todos os direitos reservados. Este código é parte de um projeto acadêmico apra a disciplina de
+ * Sistemas Embarcados do Instituto Federal de Educação, Ciência e Tecnologia do Ceará (IFCE).
+ * 
+ * @license MIT License
+ * Este projeto é distribuído sob os termos da MIT License. Consulte o arquivo LICENSE para mais detalhes.
+ * 
+ * @usage 
+ * Para usar esta aplicação há como requisito o uso de uma placa STM32 Nucleo-F030R8.
+ * 
+ * @entry
+ * - Matriz 90x90 sendo o conteúdo de uma imagem PGM P2.
+ * 
+ * @output
+ * - Matriz 45x45 sendo o conteúdo de uma imagem PGM P2 comprimida pela Transformada de Haar.
+ * 
+ * @authors
+ * João Vitor Silva Assunção
+ * Maria Augusta Sousa Rios
+ * 
+ * @date 2025-02-14
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ * @context 
+ * Trabalho de Sistemas Embarcados 
+ * Desenvolvimento de SW Embarcado
+ * Compressão de Imagens com Transformada de Haar 
+ * 
+ * @target
+ * Plataforma Alvo: Linux/Windows
+ */
+/*----------------------------------------------------------------------------------------------------------------------------------------
+-- #1.
+-- Date: Fev,14,2025
+-- Author: João Vitor Silva Assunção
+-- Motivo: Adição de uint8_t no lugar de ints
+-----------------------------------------------------------------------------------------------------------------------------------
+-- #2.
+-- Date: Fev,14,2025
+-- Author: Maria Augusta Sousa Rios
+-- Motivo: Troca de uint8_t para uint16_t
+-----------------------------------------------------------------------------------------------------------------------------------
+**/
+
 //#include "mbed.h"
 //#include "stm32f0xx.h"
 #include <stdio.h>
@@ -7,9 +60,17 @@
 
 //Serial pc(SERIAL_TX, SERIAL_RX);
 
+/**
+ * @brief Realiza a Transformação de Haar 2D em uma imagem.
+ * 
+ * @param input Matriz de entrada contendo a imagem
+ */
+//By João: #1
 void haarTransform2d(const uint8_t input[][IMAGE_SIZE]) {
     uint8_t col, row;
+//By Maria: #2
     uint16_t sum;
+//End by Maria
     printf("Resultado da Transformada:\n");
     for(row = 0; row < IMAGE_SIZE - 1; row = row + 2){
         for(col = 0; col < IMAGE_SIZE - 1 ; col = col + 2){
@@ -22,9 +83,19 @@ void haarTransform2d(const uint8_t input[][IMAGE_SIZE]) {
     }
 }
 
+/**
+ * @brief Função principal que executa a transformação de Haar em uma imagem PGM
+ * 
+ * É declarada uma matriz bidimensional, em que cada elemento representa um pixel da imagem em escala cinza (0 a 255).
+ * Esta matriz é enviada como parâmetro da função haarTransform2d e a partir dela serão feitos os calculos da transformada
+ * de Haar 2D
+ * 
+ * @return int 
+ */
 int main() {
     printf("Haar Transform - mbed OS 2\n");
     static const uint8_t input_image[][IMAGE_SIZE] = {
+//End by João
         {89, 89, 89, 90, 92, 92, 92, 91, 93, 94, 95, 97, 98, 97, 97, 98, 96, 96, 97, 98, 99, 100, 100, 100, 98, 97, 96, 94, 92, 90, 88, 87, 87, 86, 85, 85, 85, 85, 84, 83, 83, 83, 84, 84, 85, 86, 86, 87, 86, 85, 84, 84, 85, 85, 85, 84, 84, 83, 83, 82, 82, 81, 81, 80, 82, 82, 81, 81, 81, 81, 81, 81, 83, 83, 83, 84, 84, 84, 84, 84, 84, 84, 84, 83, 84, 84, 85, 85, 87, 88},
         {85, 86, 88, 89, 90, 89, 89, 88, 89, 89, 91, 93, 93, 92, 92, 94, 94, 95, 96, 97, 98, 99, 99, 99, 96, 95, 94, 92, 91, 89, 88, 88, 88, 87, 87, 87, 87, 86, 85, 84, 83, 84, 84, 84, 85, 85, 86, 86, 87, 86, 85, 85, 86, 86, 86, 86, 85, 84, 84, 83, 83, 82, 82, 81, 82, 82, 81, 81, 81, 82, 82, 82, 82, 82, 82, 82, 82, 83, 83, 83, 83, 82, 82, 82, 82, 82, 83, 84, 85, 85},
 {83, 85, 87, 88, 88, 87, 86, 85, 86, 86, 88, 89, 90, 89, 89, 91, 90, 91, 93, 94, 95, 96, 96, 95, 93, 93, 92, 91, 91, 90, 89, 89, 88, 88, 87, 87, 87, 87, 86, 85, 85, 85, 85, 86, 86, 86, 86, 86, 87, 86, 85, 85, 86, 86, 86, 86, 84, 84, 84, 83, 83, 82, 82, 82, 82, 82, 82, 82, 82, 82, 83, 83, 82, 82, 82, 82, 82, 82, 82, 82, 81, 81, 81, 80, 80, 81, 81, 82, 83, 83},
