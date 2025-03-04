@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 def lerPGM(path):
     with open(path, 'r') as f:
-        # cabeçalho do PGM P2
+        # PGM P2 Header
         cabecalho = f.readline().strip()
         
         while True: 
@@ -11,19 +11,19 @@ def lerPGM(path):
             if linha[0] != '#': 
                 break
             
-        # dimensões da imagem
+        # Image dimensions
         dimensao = linha.split()
         largura, altura = int(dimensao[0]), int(dimensao[1])
         
-        # Ler o valor máximo do pixel
+        # Read the maximum pixel value
         valor_max = int(f.readline().strip())
         
-        # Ler os valores dos pixels
+        # Read the pixel values
         pixels = []
         for linha in f:
             pixels.extend(map(int, linha.split()))
         
-        # Converter a lista de pixels em uma matriz NumPy
+        # Convert the list of pixels into a NumPy array
         img = np.array(pixels, dtype=np.uint8).reshape((altura, largura))
         return img, largura, altura
 
@@ -56,20 +56,20 @@ pgm_comparacao = '../images/pgm_comparacao/' + nome + '.pgm'
 tolerancia = 0
 diferencas, quantidade_dif, porcentagem = compararPGMs(img1, img2, tolerancia, pgm_comparacao)
 
-# mapa de calor de erros
+# Error's Heatmap
 if isinstance(diferencas, np.ndarray):
     plt.figure(figsize=(10, 7.5))
     plt.imshow(diferencas, cmap='hot', interpolation='nearest')
     plt.title('Diferenças entre Imagens', fontsize=16)
     plt.colorbar()
     
-    # Adicionar a linha de informação como texto no gráfico
+    # Add the information line as text on the graph
     info_text = (
         f"Quantidade de pixels diferentes: {quantidade_dif} ({porcentagem:.2f}%)\n"
         f"Com margem de erro de {tolerancia}"
     )
     plt.gcf().text(0.5, 0.01, info_text, fontsize=16, ha='center', va='bottom')
     
-    # Salvar e/ou exibir a imagem
-    plt.savefig('diferencas_com_info.png', bbox_inches='tight')
+    # Save and/or display the image
+    plt.savefig('differences_info.png', bbox_inches='tight')
     plt.show()
