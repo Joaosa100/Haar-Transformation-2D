@@ -1,11 +1,16 @@
 # Haar-Transformation 2D
 Usando a Transformada 2D de Haar para comprimir imagens PGM P2
 
-## 📄 Licença
-Este projeto está licenciado sob a [MIT License](LICENSE).
+<div style="display: flex; justify-content: center; gap: 3%;">
+    <img src="images/assets/onboarding/BeforeHaar2D.png" width="49%">
+    <img src="images/assets/onboarding/AfterHaar2D.png" width="49%">
+</div>
 
 ## 🌍 Leia em outro idioma
 - 🇬🇧 [English](README.md)
+
+## 📄 Licença
+Este projeto está licenciado sob a [MIT License](LICENSE).
 
 ## 📖 O que você verá aqui?
 Este projeto desenvolvido durante a cadeira de Sistemas Embarcados foi dividido em 2 partes:
