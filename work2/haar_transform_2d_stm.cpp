@@ -1,5 +1,5 @@
 /**
- * @file haarTransformStm.cpp
+ * @file haar_transform_2d_stm.cpp
  * @brief Implementação da Transformada de Haar 2D para compressão de imagens na Placa STM32 Núcleo-F030R8
  * 
  * @details Esta aplicação realiza a Transformada de Haar 2D em uma matriz declara no código 
@@ -223,7 +223,7 @@ int main() {
     printf("Aplicando a transformada em uma imagem de %dx%d ...\n", IMAGE_SIZE, IMAGE_SIZE);
     printf("Saída será do tamanho %dx%d\n", IMAGE_SIZE / 2, IMAGE_SIZE / 2);
     
-    // Processo e realiza a transformada de Haar 2D
+    // Processa e realiza a transformada de Haar 2D
     haarTransform2d(input_image);
 
     printf("Execucao Completa.\n");

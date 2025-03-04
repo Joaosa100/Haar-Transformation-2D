@@ -1,5 +1,5 @@
 /** 
- * @file haar_transform.c 
+ * @file haar_transform_2d.c 
  * @brief Implementação da Transformada de Haar 2D para compressão de imagens. 
  * @details Esta aplicação lê uma imagem no formato PGM, aplica a Transformada de Haar 2D para compressão 
  * e salva a imagem resultante. 
