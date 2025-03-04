@@ -1,6 +1,6 @@
 /**
- * @file haarTransformStm.cpp
- * @brief Implementação da Transformada de Haar 2D para compressão de imagens na Placa STM32 Núcleo-F030R8
+ * @file haar_transform_2d_stm_optimized.cpp
+ * @brief Implementação da Transformada de Haar 2D para compressão de imagens na Placa STM32 Núcleo-F030R8 com otimização de tempo de computação
  * 
  * @details Esta aplicação realiza a Transformada de Haar 2D em uma matriz declara no código 
  * e retorna o resultado da transformação no terminal 
@@ -26,7 +26,7 @@
  * João Vitor Silva Assunção
  * Maria Augusta Sousa Rios
  * 
- * @date 2025-01-22
+ * @date 2025-02-20
  * 
  * @copyright Copyright (c) 2025
  * 
@@ -40,72 +40,42 @@
  */
 /*----------------------------------------------------------------------------------------------------------------------------------------
 -- #1.
--- Date: Jan,10,2025
+-- Date: Fev,20,2025
 -- Author: João Vitor Silva Assunção
--- Motivo: Adição das bibliotecas "mbed.h" e "stm32f0xx.h" 
+-- Motivo: Troca de divisão por 2 (/2), por shift de bit para a direita 
 -----------------------------------------------------------------------------------------------------------------------------------
 -- #2.
--- Date: Jan,13,2025
+-- Date: Fev,20,2025
 -- Author: Maria Augusta Sousa Rios
--- Motivo: Adicionada inicialização da interface serial
------------------------------------------------------------------------------------------------------------------------------------
--- #3.
--- Date: Jan,13,2025
--- Author: Maria Augusta Sousa Rios
--- Motivo: Modificação dos nomes das estruturas e da estrutura do cálculo
------------------------------------------------------------------------------------------------------------------------------------
--- #4.
--- Date: Jan,13,2025
--- Author: João Vitor Silva Assunção
--- Motivo: Adição de constrição do resultado logo após o cálculo
------------------------------------------------------------------------------------------------------------------------------------
--- #5.
--- Date: Jan,13,2025
--- Author: João vitor Silva Assunção
--- Motivo: Adição da entrada (matriz de uma imagem PGM P2 90x90) na flash do microcontrolador
------------------------------------------------------------------------------------------------------------------------------------
--- #6.
--- Date: Jan,15,2025
--- Author: Maria Augusta Sousa Rios
--- Motivo: Modificação nas mensagens de comunicação do micro com o usuário, adição da chamada da função e limpeza do código
+-- Motivo: Remoção de constrição desnecessária
 -----------------------------------------------------------------------------------------------------------------------------------
 **/
-//By João: #1.
-#include "mbed.h"
-#include "stm32f0xx.h"
-//End by João
+
+//#include "mbed.h"
+//#include "stm32f0xx.h"
 #include <stdio.h>
 
-#define IMAGE_SIZE 90 // Tamanho da matriz quadrada de entrada que representa uma imagem
+#define IMAGE_SIZE 90
 
-
-//By Maria: #2.
-// Inicializando a interface serial
-Serial pc(SERIAL_TX, SERIAL_RX);
-//End by Maria
+//Serial pc(SERIAL_TX, SERIAL_RX);
 
 /**
  * @brief Realiza a Transformação de Haar 2D em uma imagem.
  * 
  * @param input Matriz de entrada contendo a imagem
  */
-
-//By Maria: #3.
 void haarTransform2d(const int input[][IMAGE_SIZE]) {
     int col, row, sum;
     printf("Resultado da Transformada:\n");
-
-    // percorre toda a imagem em blocos de 2x2
     for(row = 0; row < IMAGE_SIZE - 1; row = row + 2){
         for(col = 0; col < IMAGE_SIZE - 1 ; col = col + 2){
-            sum = input[row][col] + input[row][col+1] + input[row+1][col] + input[row+1][col+1];        
-            sum = sum / 2;
-//End by Maria
-//By João: #4.
-            sum = (sum < 0) ? 0 : ((sum > 255) ? 255 : sum);
-            // Printa o resultado do calculo
-            printf("%4d ", sum);
+//By João: #1
+            sum = (input[row][col] + input[row][col+1] + input[row+1][col] + input[row+1][col+1]) >> 1;
 //End by João
+//By Maria: #2            
+            sum = (sum > 255) ? 255 : sum;
+//End by Maria            
+            printf("%4d ", sum);
         }
         printf("\n");
     }
@@ -121,11 +91,8 @@ void haarTransform2d(const int input[][IMAGE_SIZE]) {
  * @return int 
  */
 int main() {
-//By João #5
     printf("Haar Transform - mbed OS 2\n");
-    // Definindo a matriz imagem
     static const int input_image[][IMAGE_SIZE] = {
-        // Matriz Imagem 90 x 90
         {89, 89, 89, 90, 92, 92, 92, 91, 93, 94, 95, 97, 98, 97, 97, 98, 96, 96, 97, 98, 99, 100, 100, 100, 98, 97, 96, 94, 92, 90, 88, 87, 87, 86, 85, 85, 85, 85, 84, 83, 83, 83, 84, 84, 85, 86, 86, 87, 86, 85, 84, 84, 85, 85, 85, 84, 84, 83, 83, 82, 82, 81, 81, 80, 82, 82, 81, 81, 81, 81, 81, 81, 83, 83, 83, 84, 84, 84, 84, 84, 84, 84, 84, 83, 84, 84, 85, 85, 87, 88},
 {85, 86, 88, 89, 90, 89, 89, 88, 89, 89, 91, 93, 93, 92, 92, 94, 94, 95, 96, 97, 98, 99, 99, 99, 96, 95, 94, 92, 91, 89, 88, 88, 88, 87, 87, 87, 87, 86, 85, 84, 83, 84, 84, 84, 85, 85, 86, 86, 87, 86, 85, 85, 86, 86, 86, 86, 85, 84, 84, 83, 83, 82, 82, 81, 82, 82, 81, 81, 81, 82, 82, 82, 82, 82, 82, 82, 82, 83, 83, 83, 83, 82, 82, 82, 82, 82, 83, 84, 85, 85},
 {83, 85, 87, 88, 88, 87, 86, 85, 86, 86, 88, 89, 90, 89, 89, 91, 90, 91, 93, 94, 95, 96, 96, 95, 93, 93, 92, 91, 91, 90, 89, 89, 88, 88, 87, 87, 87, 87, 86, 85, 85, 85, 85, 86, 86, 86, 86, 86, 87, 86, 85, 85, 86, 86, 86, 86, 84, 84, 84, 83, 83, 82, 82, 82, 82, 82, 82, 82, 82, 82, 83, 83, 82, 82, 82, 82, 82, 82, 82, 82, 81, 81, 81, 80, 80, 81, 81, 82, 83, 83},
@@ -217,17 +184,13 @@ int main() {
 {126, 124, 120, 113, 124, 129, 131, 126, 126, 133, 129, 120, 109, 103, 108, 109, 115, 117, 116, 114, 120, 130, 133, 130, 133, 133, 122, 118, 111, 105, 118, 123, 118, 123, 126, 126, 123, 127, 132, 124, 119, 136, 135, 123, 124, 114, 115, 119, 131, 124, 108, 120, 121, 114, 115, 120, 128, 105, 110, 125, 108, 114, 112, 117, 134, 140, 140, 139, 122, 123, 114, 120, 110, 85, 113, 128, 116, 101, 122, 131, 130, 91, 91, 92, 103, 107, 100, 109, 103, 101},
 {132, 131, 127, 119, 129, 132, 133, 127, 127, 133, 129, 120, 108, 101, 105, 105, 113, 117, 119, 119, 125, 136, 144, 144, 138, 136, 123, 120, 115, 110, 121, 124, 118, 123, 125, 125, 122, 126, 134, 127, 126, 143, 141, 128, 128, 117, 117, 121, 129, 134, 123, 127, 130, 136, 140, 139, 138, 117, 121, 130, 109, 114, 113, 119, 136, 145, 147, 144, 124, 125, 117, 122, 117, 91, 115, 130, 121, 105, 122, 130, 124, 118, 128, 106, 102, 115, 112, 109, 108, 106}
     };
-//End by João
 
-//By Maria #6
     printf("Aplicando a transformada em uma imagem de %dx%d ...\n", IMAGE_SIZE, IMAGE_SIZE);
     printf("Saída será do tamanho %dx%d\n", IMAGE_SIZE / 2, IMAGE_SIZE / 2);
-    
-    // Processo e realiza a transformada de Haar 2D
+
     haarTransform2d(input_image);
 
     printf("Execucao Completa.\n");
     
     while(true);
-//End by Maria
 }

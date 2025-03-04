@@ -1,5 +1,5 @@
 import cv2
-import pywt  # Biblioteca PyWavelets
+import pywt  # PyWavelets
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -18,12 +18,12 @@ LL, (LH, HL, HH) = coeffs2
 haar_img = np.vstack((np.hstack((LL, HL)), np.hstack((LH, HH))))
 
 #haar_img[haar_img < 0] = 0
-haar_img = np.clip(haar_img, 0, 255) # garantir valores entre 0 e 255
+haar_img = np.clip(haar_img, 0, 255) # valors between 0 and 255
 haar_img = np.floor(haar_img).astype(int)
 
 # salvar imagem
 with open(imagem_output, 'w') as f:
-    # Cabeçalho do arquivo PGM P2
+    # PGM P2 Header
     f.write('P2\n')
     f.write(f'{haar_img.shape[1]} {haar_img.shape[0]}\n')
     f.write('255\n')

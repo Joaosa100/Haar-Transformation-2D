@@ -1,10 +1,22 @@
 # Haar-Transformation 2D
 Usando a Transformada 2D de Haar para comprimir imagens PGM P2
 
+<div style="display: flex; justify-content: center; gap: 3%;">
+    <img src="images/assets/onboarding/BeforeHaar2D.png" width="49%">
+    <img src="images/assets/onboarding/AfterHaar2D.png" width="49%">
+</div>
+
+## 🌍 Leia em outro idioma
+- 🇬🇧 [English](README.md)
+
+## 📄 Licença
+Este projeto está licenciado sob a [MIT License](LICENSE).
+
 ## 📖 O que você verá aqui?
 Este projeto desenvolvido durante a cadeira de Sistemas Embarcados foi dividido em 2 partes:
 1. Projetar o algoritmo de forma correta, indicando entrada/saída de dados, complexidades e construir e definir os testes para que tudo seja executado em um PC.
 2. Transportar o algoritmo para um sistema embarcado fazendo as devidas alterações e gestão de memória.
+3. Propor e implementar otimização em uma aplicação embarcada visando a reduzir tempo de computação ou memória. 
 
 ## Parte 1: Algoritmo no Ambiente PC
 ### 🎯 Objetivo
@@ -25,13 +37,13 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
 2. **Saída de Dados:**
    - Imagem comprimida para proporção 45x45 utilizando a Transformada 2D de Haar.
 3. **Implementação do algoritmo base:**
-   - O algoritmo implementado pode ser visualizado no arquivo [**haar_transformation.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transformation.c).
+   - O algoritmo implementado pode ser visualizado no arquivo [**haar_transformation_2d.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transformation_2d.c).
    - Foram utilizadas as bibliotecas <stdio.h>, <stdlib.h>, <string.h> e <math.h>.
 4. **Complexidades:**
    - **Pior caso**: O(NxM), sendo N o número de linhas e M o número de colunas.
    - **Melhor caso**: O(NxM), sendo N o número de linhas e M o número de colunas, requer percorrer todos os elementos da imagem.
 5. **Primeiros Testes unitários para validar as transformações:**
-   - Nos testes realizados tivemos os seguintes resultados comparando as saídas dos algoritmos [**haar_transformation.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transformation.c) com o [**haar_wavelet.py**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/haarWavelet.py) usando o [**validacao.py**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/validacao.py):
+   - Nos testes realizados tivemos os seguintes resultados comparando as saídas dos algoritmos [**haar_transformation_2d.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transformation_2d.c) com o [**haar_wavelet.py**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/haarWavelet.py) usando o [**validacao.py**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/validacao.py):
    <br>
 
    | **Imagem Original** | **Resultado C** | **Resultado Python** |
@@ -42,7 +54,7 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
      <br>
       ![Validacao - py](images/assets/firstAlgorithmTest/comp90er.png)
 
-      **Legenda:** Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets). Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 892 pixels no total de 8100 (90x90), totalizando 11.01% de erro utilizando uma tolerância de diferença zero.
+       *Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets). Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 892 pixels no total de 8100 (90x90), totalizando 11.01% de erro utilizando uma tolerância de diferença zero.*
 
    - Agora, descartando as outras regiões da imagem e utilizando o resultado comprimido (45x45):
    
@@ -54,11 +66,11 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
      <br>
       ![Validacao - py](images/assets/firstAlgorithmTest/comp45er.png)
 
-      **Legenda:** Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 87 pixels no total de 2025 (45x45), totalizando 4.3% de erro utilizando uma tolerância de diferença zero.
+      *Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 87 pixels no total de 2025 (45x45), totalizando 4.3% de erro utilizando uma tolerância de diferença zero.*
 
 1. **Melhorando o algoritmo:**
-   - Mesmo com uma leve diferença, era necessário atingir 100% de semelhança com a saída da Pywavelets, então modificamos o algoritmo e o salvamos neste arquivo [**haar_transform.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform.c).
-   - Também salvamos uma versão com todas as sub-bandas de frequência em [**haar_all.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_all.c)
+   - Mesmo com uma leve diferença, era necessário atingir 100% de semelhança com a saída da Pywavelets, então modificamos o algoritmo e o salvamos neste arquivo [**haar_transform_2d.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform_2d.c).
+   - Também salvamos uma versão com todas as sub-bandas de frequência em [**haar_all_2d.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_all_2d.c)
    - Retiramos a biblioteca <math.h>:<br>
    ```c
       // Antes a função Haar2D chamava de forma iterativa a Haar1D:
@@ -93,7 +105,7 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
          }
       }
    ```
-   - Assim, os resultados usando o [**haar_transform.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform.c) foram:
+   - Assim, os resultados usando o [**haar_transform_2d.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform_2d.c) foram:
    <br>
 
    | **Imagem Original** | **Resultado C** | **Resultado Python** |
@@ -104,11 +116,11 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
      <br>
       ![Validacao - py](images/assets/improvedAlgorithmTest/comp45LL.png)
 
-      **Legenda:** Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 0 pixels no total de 2025 (45x45), totalizando 0.0% de erro utilizando uma tolerância de diferença zero.
+      *Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 0 pixels no total de 2025 (45x45), totalizando 0.0% de erro utilizando uma tolerância de diferença zero.*
 1. **Medição de consumo de RAM**
    - Compile o código para gerar o executável da mesma maneira que fizemos para os testes:<br>
    ```bash
-   gcc -o myExec haar_transform.c -lm
+   gcc -o myExec haar_transform_2d.c -lm
    ``` 
    - Para saber quanto de memória ram é necessária para rodar o código, usamos a seguinte linha de terminal no sistema Linux:<br>
    ```bash
@@ -322,7 +334,7 @@ Conseguimos atingir o objetivo principal de consumir 8000 inteiros de entrada co
 ### 🧹 Quarto dia - O código final para a placa
 O pior já havia passado, agora precisávamos limpar o código e remover o BLOCK_SIZE.
 
-Começamos analisando nossas outras tentativas e revisando a metodologia de cálculo. Como o código só percorre a entrada e já faz o cálculo, precisamos apenas percorrer a quantidade suficiente para coletar os índices para o cálculo. Então, precisávamos apenas de 2 FORs e retiramos o BLOCK_SIZE, pois não precisava fragmentar a entrada, mas sim só percorrer o tanto que precisávamos por vez. Assim, após limparmos o código e adicionarmos algumas mensagens de funcionamento, batizamos este último código desta etapa de [**haar_transform_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_stm.cpp).
+Começamos analisando nossas outras tentativas e revisando a metodologia de cálculo. Como o código só percorre a entrada e já faz o cálculo, precisamos apenas percorrer a quantidade suficiente para coletar os índices para o cálculo. Então, precisávamos apenas de 2 FORs e retiramos o BLOCK_SIZE, pois não precisava fragmentar a entrada, mas sim só percorrer o tanto que precisávamos por vez. Assim, após limparmos o código e adicionarmos algumas mensagens de funcionamento, batizamos este último código desta etapa de [**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp).
 
 
 ```c
@@ -360,7 +372,7 @@ void haarTransform2d(const int input[][IMAGE_SIZE]) {
 > Com calma revisamos e limpamos bastante o código, inclusive ficou bem mais fácil de lê-lo.
 
 ### Resultado da demonstração
-Depois de tudo, este foi o resultado do teste de [**validacão**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/validacao.py) do [**haar_transform_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_stm.cpp) com o [**haar_wavelet.py**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/haarWavelet.py)
+Depois de tudo, este foi o resultado do teste de [**validacão**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/validacao.py) do [**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp) com o [**haar_wavelet.py**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/haarWavelet.py)
 
    | **Imagem Original** | **Resultado C** | **Resultado Python** |
    |----------------------|------------------|----------------------|
@@ -370,7 +382,7 @@ Depois de tudo, este foi o resultado do teste de [**validacão**](https://github
      <br>
       ![Validacao - py](images/assets/improvedAlgorithmTest/comp45LL.png)
 
-      **Legenda:** Diferenças entre os resultados obtidos no algoritmo implementado em C para a placa e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 0 pixels no total de 2025 (45x45), totalizando 0.0% de erro utilizando uma tolerância de diferença zero.
+      *Diferenças entre os resultados obtidos no algoritmo implementado em C para a placa e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 0 pixels no total de 2025 (45x45), totalizando 0.0% de erro utilizando uma tolerância de diferença zero.*
 
 ### Consumo de memória
 O próprio Mbed, durante o build, faz a medição de memória do .elf antes de convertê-lo para .bin<br>
@@ -382,8 +394,267 @@ Agora, o algoritmo precisa de **872 bytes** para ser executado (um acréscimo de
 
 ---
 
-## Parte 3
-Em breve
+## Parte 3: Análise e Otimização
+### 🎯 Objetivo
+Após validar o funcionamento do algoritmo no PC e na plataforma embarcada (STM32-F030R8), o próximo passo é avaliar e melhorar seu desempenho, considerando:
+1. **Medições de desempenho** 📊: Analisar tempo de execução, uso de memória e consumo de energia (quando aplicável);  
+2. **Otimização do código** 🚀: Implementar melhorias focadas na redução de tempo de computação ou uso de memória na STM32.
+3. **Comparação entre plataformas** 🔄: Observar diferenças entre o ambiente PC e a plataforma embarcada quanto às medições antes e após a otimização realizada;  
+
+### 🛠 Tecnologias Utilizadas
+- Linguagem de programação: C, Python e C++
+- Ferramentas de teste: Transformada de Haar usando a biblioteca Pywavelets
+
+### 🌐 Ambiente de Desenvolvimento
+- Sistema Operacional: PopOS 22.04 LTS e Windows 10
+- IDE/Editor: Keil Studio Cloud e VSCode
+- Compilador/Interprete: GCC, Python 3.8+, G++ (Keil Studio Cloud)
+
+---
+### 🚀 Como será feita a otimização?  
+1. Escolher **UM** dos parâmetros analisados na STM32 para otimizar: **tempo de computação OU uso de memória**;  
+2. Implementar otimizações exclusivamente na parte do código que **implementa o algoritmo** (sem alterar entrada de dados ou saída de resultados);  
+3. Repetir as medições para verificar o impacto da otimização.  
+---
+
+### 📏 Como serão realizadas as medições?  
+ - As medições devem ser feitas sob as mesmas condições para ambas as plataformas (PC e STM32), garantindo comparabilidade. Os parâmetros analisados serão:  
+
+#### 🖥️ Para ambas as plataformas (PC e STM32):  
+1. **⏱️ Tempo de computação** – Apenas do algoritmo, excluindo partes de I/O, geração de dados e impressão;  
+2. **📦 Memória de código** – Espaço ocupado pelo código da aplicação, sem considerar dados de entrada;  
+3. **🗄️ Memória de dados** – Espaço ocupado pelos dados manipulados pela aplicação.  
+
+#### 🔋 Exclusivamente para a plataforma embarcada (STM32):  
+4. **⚡ Energia consumida** – Medição de corrente e tensão durante a execução.
+---
+
+### 🚧 Desenvolvimento
+Durante as aulas disponíveis tivemos que buscar uma otimização válida e fazer as medições de corrente e tensão na placa com o código antigo (Parte 2) e o otimizado (Parte 3). <br>
+
+Medições de consumo de memória eram possíveis sem precisar da placa, mas o mesmo não era possível quanto a medir o tempo de computação já que era necessário executar o código na mesma.<br>
+
+### 🚀 Processo de Otimização  
+Começamos com uma otimização de consumo de memória e trocamos os tipos **int** para **uint8_t** e **uint16_t**. Como inteiros consomem 4 bytes e uint8_t e uint16_t consomem 1 e 2 bytes, respectivamente. Acreditamos que teríamos uma melhoria aceitável em memória.
+
+
+Código antes da melhoria de consumo de memória:
+```c
+#include "mbed.h"
+#include "stm32f0xx.h"
+#include <stdio.h>
+
+#define IMAGE_SIZE 90
+
+Serial pc(SERIAL_TX, SERIAL_RX);
+
+void haarTransform2d(const int input[][IMAGE_SIZE]) {
+    int col, row, sum;
+    printf("Resultado da Transformada:\n");
+    for(row = 0; row < IMAGE_SIZE - 1; row = row + 2){
+        for(col = 0; col < IMAGE_SIZE - 1 ; col = col + 2){
+            sum = input[row][col] + input[row][col+1] + input[row+1][col] + input[row+1][col+1];     
+            sum = sum / 2;
+            sum = (sum < 0) ? 0 : ((sum > 255) ? 255 : sum);
+            printf("%4d ", sum);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    printf("Haar Transform - mbed OS 2\n");
+    static const int input_image[][IMAGE_SIZE] = {
+      //matrix
+   }
+   //...
+```
+> Visualização parcial do código [**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp)
+
+Código após a troca por uints:
+```c
+#include "mbed.h"
+#include "stm32f0xx.h"
+#include <stdio.h>
+#include <stdint.h>
+
+#define IMAGE_SIZE 90
+
+Serial pc(SERIAL_TX, SERIAL_RX);
+
+void haarTransform2d(const uint8_t input[][IMAGE_SIZE]) {
+    uint8_t col, row;
+    uint16_t sum;
+    printf("Resultado da Transformada:\n");
+    for(row = 0; row < IMAGE_SIZE - 1; row = row + 2){
+        for(col = 0; col < IMAGE_SIZE - 1 ; col = col + 2){
+            sum = input[row][col] + input[row][col+1] + input[row+1][col] + input[row+1][col+1];        
+            sum = sum / 2;
+            sum = (sum < 0) ? 0 : ((sum > 255) ? 255 : sum);
+            printf("%4d ", sum);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    printf("Haar Transform - mbed OS 2\n");
+    static const uint8_t input_image[][IMAGE_SIZE] = {
+      //matrix
+    }
+    //...
+```
+> Visualização parcial do código [**haar_transform_2d_stm_uint.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work3/original/haar_transform_2d_stm_uint.cpp)
+
+Entretanto, ao analisar melhor o código, percebemos que a maior parte da contribuição de otimização de memória foi dos dados de entrada que antes eram 8100 inteiros de 4 bytes e que agora são de apenas de 1 byte, e de acordo com as regras de otimização válidas, a maior parte da contribuição não pode ser nos dados de entrada. 
+
+Quanto às outras variáveis, apenas **3** foram afetadas pela melhoria: *col*, *row* e *sum*, que **antes eram 3 variáveis de 4 bytes cada e viraram de 1 byte (*col* e *row*) e de 2 bytes (*sum*)**, sendo esta última necessária ser maior para suportar uma soma de até 4x255 (255 é o maior número inteiro que podemos ter em um arquivo PGM P2, e nosso código soma 4 inteiros por vez).
+
+❌ **Sendo assim, esta foi considerada uma melhoria insuficiente para avaliação.** ❌ 
+
+
+Então, usamos as aulas restantes para melhorar o código em **tempo de computação**, mas nos restava pouco tempo e **já haviamos enxugado e melhorado bastante o código** da Parte 1 ([**haar_transform_2d.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform_2d.c)) para a Parte 2 ([**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp)), tornando mais difícil encontrar melhorias significativas;<br>
+
+Como não encontramos uma solução otimizada durante as aulas, só pudemos medir a energia usando o código [**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp).
+
+
+#### ⚔️ **NÃO DESISTIMOS !** ⚔️ 
+**Transporte do código para o PC** 🖥️: Como as aulas com a placa já haviam terminado, e nós não tínhamos ainda encontrado uma alternativa otimizada de código, transportamos o código da placa para o PC para encontrar uma otimização em tempo de computação.    
+
+Depois de muito debuggar e revirar o código, encontramos enfim uma inconsistência e uma melhoria em tempo.
+
+Código antes: 
+```c
+#include "mbed.h"
+#include "stm32f0xx.h"
+#include <stdio.h>
+
+#define IMAGE_SIZE 90
+
+Serial pc(SERIAL_TX, SERIAL_RX);
+
+void haarTransform2d(const int input[][IMAGE_SIZE]) {
+    int col, row, sum;
+    printf("Resultado da Transformada:\n");
+    for(row = 0; row < IMAGE_SIZE - 1; row = row + 2){
+        for(col = 0; col < IMAGE_SIZE - 1 ; col = col + 2){
+            sum = input[row][col] + input[row][col+1] + input[row+1][col] + input[row+1][col+1];     
+            sum = sum / 2;
+            sum = (sum < 0) ? 0 : ((sum > 255) ? 255 : sum);
+            printf("%4d ", sum);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    printf("Haar Transform - mbed OS 2\n");
+    static const int input_image[][IMAGE_SIZE] = {
+      //matrix
+   }
+   //...
+```
+> Visualização parcial do código [**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp)
+
+Na condição temos 2 ternários e a verificação de números negativos é considerada desnecessária, pois em um arquivo PGM P2 todos os números presentes estão no intervalo fechado [0 - 255], então ao somar números positivos e dividí-los por outro positivo, apenas teremos números positivos ou nulos. Então, retiramos essa verificação.
+
+Porém a grande melhoria está na divisão, tentamos modificá-la para sum = sum * 0.5; mas não havia mudanças de tempo, então alteramos a divisão para um shift de valor para a direita e os resultados foram surpreendentes:
+```c
+//#include "mbed.h"
+//#include "stm32f0xx.h"
+#include <stdio.h>
+
+#define IMAGE_SIZE 90
+
+//Serial pc(SERIAL_TX, SERIAL_RX);
+
+void haarTransform2d(const int input[][IMAGE_SIZE]) {
+    int col, row, sum;
+    printf("Resultado da Transformada:\n");
+    for(row = 0; row < IMAGE_SIZE - 1; row = row + 2){
+        for(col = 0; col < IMAGE_SIZE - 1 ; col = col + 2){
+            sum = (input[row][col] + input[row][col+1] + 
+               input[row+1][col] + input[row+1][col+1]) >> 1;
+            sum = (sum > 255) ? 255 : sum;
+            printf("%4d ", sum);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    printf("Haar Transform - mbed OS 2\n");
+    static const int input_image[][IMAGE_SIZE] = {
+      //matrix
+    }
+```
+> Visualização parcial do código [**haar_transform_2d_stm_optimized.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work3/original/haar_transform_2d_stm_optimized.cpp)
+---
+### 🕒 Medições de Tempo PC x STM32:
+Utilizamos a biblioteca chrono para medição de tempo no algoritmo no PC.
+
+Na STM32 utilizamos a própria biblioteca Timer presente na API MBED.
+
+#### => PC ([**haar_transform_2d_stm_chrono.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work3/benchmarking/chrono_based/haar_transform_2d_stm_chrono.cpp)):
+ - Média de 10 testes: 10,65 microssegundos;
+ - Desvio padrão: 0,238 microssegundos.
+
+#### => STM32 ([**haar_transform_2d_stm_timer.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work3/benchmarking/timer_mbed_based/haar_transform_2d_stm_timer.cpp)):
+ - Média de 10 testes: 93 microssegundos;
+ - Desvio Padrão: 0 microssegundos.
+ 
+ > OBS: Bem provável que houve interferências externas como a comunicação via terminal para visualizar os resultados no Keil Studio Cloud.
+
+
+### 📊 Medições de Tempo Antes e Depois da Otimização (PC):
+Utilizamos a biblioteca chrono para medição de tempo no algoritmo no PC.
+
+#### => Não otimizado ([**haar_transform_2d_stm_chrono.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work3/benchmarking/chrono_based/haar_transform_2d_stm_chrono.cpp)):
+ - Média de 10 testes: 10,65 microssegundos;
+ - Desvio Padrão: 0,238 microssegundos.
+
+#### => Otimizado ([**haar_transform_2d_stm_otimized_chrono.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work3/benchmarking/chrono_based/haar_transform_2d_stm_otimized_chrono.cpp)):
+ - Média de 10 testes: 7,44 microssegundos;
+ - Desvio Padrão: 0,475 microssegundos
+
+**😎 UMA ECONOMIA DE ATÉ 30% EM TEMPO DE COMPUTAÇÃO!**
+
+Gráfico dos testes usado na apresentação:
+![Otimized Vs Not Otimized](images/assets/consumption/timeBoards.png)<br>
+*Gráfico comparando os resultados de cada teste do algoritmo não otimizado (em azul) com o algoritmo otilmizado (em laranja).*
+
+---
+### 📦 Medições de Memória
+Como já havíamos feito essas medições na Parte 1 e 2, apenas transcrevemos o valor abaixo:
+#### => PC ([**haar_transform_2d.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform_2d.c)):
+Usando o comando SIZE no Linux
+  - text: 4446 bytes
+  - data: 688 bytes
+  - bss: 16 bytes
+  - **Total: 5150 bytes**
+
+#### => STM32 ([**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp)):
+O próprio builder do Keil Studio Cloud oferece os valores
+  - Flash: 53 Kb
+  - Memory: 872 bytes
+
+### ⚡ Medições de Energia
+Usando a Fórmula para calcular a energia:
+> E = V * I * t
+
+Sabendo que pelo datasheet a tensão da placa é de 3.3V
+
+Fizemos as seguintes medições em um espaço de tempo de 10s:
+![current](images/assets/consumption/power_consumption.png)<br>
+*Gráfico com as medições da corrente. São 10 medições em um espaço de 10 segundos*
+Usando uma média dos valores em mA temos: 62.84 mA ou 0.063 A. 
+
+> E = 3.3V * 0.063A * 10s<br>
+E = 2 J
+
+**Resultado:** foram consumidos 2 Joules pela placa em 10 segundos.
+
+## Curtiu? não se esqueça de deixar uma estrela! 🌟 
 
 ## 👥 Colaboradores
 
@@ -392,6 +663,7 @@ Membros que participaram do desenvolvimento deste projeto:
 | [![GitHub User 1](https://github.com/Joaosa100.png?size=420)](https://github.com/Joaosa100) | [![GitHub User 2](https://github.com/AugustaSousa.png?size=420)](https://github.com/AugustaSousa) |
 |:-----------------------------------------------:|:-----------------------------------------------:|
 | [**Joaosa100**](https://github.com/Joaosa100)   <br><br> <a href="https://www.linkedin.com/in/joao-silva-assuncao" target="_blank" style="text-decoration:none;"><button style="padding: 10px 20px; font-size: 16px; margin-top: 10px; background-color: #0077B5; color: white; border: none; border-radius: 5px; cursor: pointer;">LinkedIn</button></a> | [**AugustaSousa**](https://github.com/AugustaSousa)   <br><br> <a href="https://linkedin.com/in/augusta-sousa" target="_blank" style="text-decoration:none;"><button style="padding: 10px 20px; font-size: 16px; margin-top: 10px; background-color: #0077B5; color: white; border: none; border-radius: 5px; cursor: pointer;">LinkedIn</button></a> |
+
 
 
 
