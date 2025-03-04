@@ -613,7 +613,7 @@ Utilizamos a biblioteca chrono para medição de tempo no algoritmo no PC.
  - Média de 10 testes: 10,65 microssegundos;
  - Desvio Padrão: 0,238 microssegundos.
 
-#### => Otimizado ([**haar_transform_2d_stm_otimized_chrono.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work3/benchmarking/chrono_based/haar_transform_2d_stm_otimized_chrono.cpp)):
+#### => Otimizado ([**haar_transform_2d_stm_optimized_chrono.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work3/benchmarking/chrono_based/haar_transform_2d_stm_optimized_chrono.cpp)):
  - Média de 10 testes: 7,44 microssegundos;
  - Desvio Padrão: 0,475 microssegundos
 
@@ -654,7 +654,12 @@ E = 2 J
 
 **Resultado:** foram consumidos 2 Joules pela placa em 10 segundos.
 
-## Curtiu? não se esqueça de deixar uma estrela! 🌟 
+<h2 align="center">🌟 ⭐ Curtiu? Não se esqueça de deixar uma estrela! ⭐ 🌟</h2>
+<p align="center">
+    <a href="https://github.com/Joaosa100/Haar-Transformation/stargazers">
+        <img src="https://img.shields.io/github/stars/Joaosa100/Haar-Transformation?style=social" alt="GitHub Stars"/>
+    </a>
+</p>
 
 ## 👥 Colaboradores
 
