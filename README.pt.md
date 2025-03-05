@@ -1,4 +1,4 @@
-# Haar-Transformation 2D
+# Haar Transformation 2D
 Usando a Transformada 2D de Haar para comprimir imagens PGM P2
 
 <div style="display: flex; justify-content: center; gap: 3%;">
