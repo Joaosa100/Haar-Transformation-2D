@@ -655,11 +655,6 @@ E = 2 J
 **Resultado:** foram consumidos 2 Joules pela placa em 10 segundos.
 
 <h2 align="center">🌟 ⭐ Curtiu? Não se esqueça de deixar uma estrela! ⭐ 🌟</h2>
-<p align="center">
-    <a href="https://github.com/Joaosa100/Haar-Transformation/stargazers">
-        <img src="https://img.shields.io/github/stars/Joaosa100/Haar-Transformation?style=social" alt="GitHub Stars"/>
-    </a>
-</p>
 
 ## 👥 Equipe de Desenvolvimento
 Membros que participaram do desenvolvimento deste projeto:

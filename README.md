@@ -662,11 +662,6 @@ E = 2 J
 **Result:** 2 Joules were consumed by the board in 10 seconds.
 
 <h2 align="center">🌟 ⭐ Enjoyed it? Don't forget to leave a star! ⭐ 🌟</h2>
-<p align="center">
-    <a href="https://github.com/Joaosa100/Haar-Transformation/stargazers">
-        <img src="https://img.shields.io/github/stars/Joaosa100/Haar-Transformation?style=social" alt="GitHub Stars"/>
-    </a>
-</p>
 
 ## 👥 Development Team
 Members who participated in the development of this project:
