@@ -13,7 +13,7 @@ Usando a Transformada 2D de Haar para comprimir imagens PGM P2
 Este projeto está licenciado sob a [MIT License](LICENSE).
 
 ## 📖 O que você verá aqui?
-Este projeto desenvolvido durante a cadeira de Sistemas Embarcados foi dividido em 2 partes:
+Este projeto desenvolvido durante a cadeira de Sistemas Embarcados foi dividido em 3 partes:
 1. Projetar o algoritmo de forma correta, indicando entrada/saída de dados, complexidades e construir e definir os testes para que tudo seja executado em um PC.
 2. Transportar o algoritmo para um sistema embarcado fazendo as devidas alterações e gestão de memória.
 3. Propor e implementar otimização em uma aplicação embarcada visando a reduzir tempo de computação ou memória. 

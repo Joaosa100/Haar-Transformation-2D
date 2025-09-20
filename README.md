@@ -13,7 +13,7 @@ Using the 2D Haar Transform to compress PGM P2 images
 This project is licensed under the [MIT License](LICENSE).  
 
 ## 📖 What will you find here?  
-This project, developed during the Embedded Systems course, was divided into two parts:  
+This project, developed during the Embedded Systems course, was divided into three parts:  
 1. Designing the algorithm correctly, specifying data input/output, analyzing complexities, and building and defining tests so that everything runs on a PC.  
 2. Porting the algorithm to an embedded system, making the necessary modifications and managing memory.  
 3. Proposing and implementing optimizations in an embedded application to reduce computation time or memory usage.  
