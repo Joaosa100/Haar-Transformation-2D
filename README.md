@@ -14,7 +14,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## 📖 What will you find here?  
 This project, developed during the Embedded Systems course, was divided into three parts:  
-1. Designing the algorithm correctly, specifying data input/output, analyzing complexities, and building and defining tests so that everything runs on a PC.  
+1. Designing the algorithm properly, specifying data input/output, analyzing complexity, and building and defining tests so that everything runs on a PC.  
 2. Porting the algorithm to an embedded system, making the necessary modifications and managing memory.  
 3. Proposing and implementing optimizations in an embedded application to reduce computation time or memory usage.  
 
@@ -60,7 +60,7 @@ Develop an algorithm to apply the 2D Haar Transform to images in PGM P2 format. 
      <br>
       ![Validation - py](images/assets/firstAlgorithmTest/comp90er.png)
 
-       *Differences between the results obtained from the algorithm implemented in C and Python (Pywavelets). Each white dot represents a discrepancy identified in the Haar transformation. A total of 892 pixels differed out of 8100 (90x90), resulting in an 11.01% error using a zero-difference tolerance.*
+       *Differences between the results obtained from the algorithm implemented in C and Python (Pywavelets). Each white dot represents a discrepancy identified in the Haar transformation. A total of 892 pixels differed out of 8100 (90x90), resulting in an 11.01% error with a zero-difference tolerance.*
 
    - Now, discarding other regions of the image and using the compressed result (45x45):
 
@@ -217,14 +217,14 @@ We were introduced to how to create a "Hello World" on the board, the famous Bli
 ---
 
 ### 🙏 Second Day - Finally, a Working Board  
-As more boards were available on this day, we were finally able to get a functional one for testing.  
+As more boards were available on this day, we finally managed to get a functional one for testing.  
 
 ### ==> Checkpoint 1  
 After an hour of modifying the code and better understanding how the API communication worked in practice (since we couldn't test at home), we discovered that a library needed to be added, but it was neither mentioned in the API documentation nor by the professor. This was the **register library**.  
 ```c
 #include "stm32f0xx.h"
 ```
-So, we used the last hour to test the code directly on the board. Since we were still learning how to use it, we opted for smaller images to avoid exceeding the board's RAM limit. From this, we arrived at the first version of our code, which we named [**Checkpoint 1**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/checkpoint1.cpp), as there was no way we would let this be the final version.  
+So, we used the last hour to test the code directly on the board. Since we were still learning how to use it, we opted for smaller images to avoid exceeding the board's RAM limit. From this, we arrived at the first version of our code, which we named [**Checkpoint 1**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/checkpoint1.cpp), as we could not allow this to be the final version.  
 
 ```c
 // Define parameters
@@ -519,7 +519,7 @@ As for other variables, only **3** were affected by the optimization: *col*, *ro
 
 ❌ **Thus, this was considered an insufficient improvement for evaluation.** ❌  
 
-So, we used the remaining classes to improve the code's **computation time**, but we had little time left and **had already streamlined and improved the code significantly** from Part 1 ([**haar_transform_2d.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform_2d.c)) to Part 2 ([**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp)), making it harder to find significant improvements.  
+So, we used the remaining classes to improve the code's **computation time**, but we had little time left and **we had already optimized and improved the code significantly** from Part 1 ([**haar_transform_2d.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform_2d.c)) to Part 2 ([**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp)), making it harder to find significant improvements.  
 
 Since we couldn't find an optimized solution during the classes, we were only able to measure the energy consumption using the [**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp) code.  
 
@@ -625,7 +625,7 @@ We used the chrono library for time measurement in the algorithm on the PC.
 
 **😎 A SAVINGS OF UP TO 30% IN COMPUTATION TIME!**
 
-Graph of the tests used in the presentation:
+Graph showing the test results:
 ![Otimized Vs Not Otimized](images/assets/consumption/timeBoards.png)<br>
 *Graph comparing the results of each test from the non-optimized algorithm (in blue) with the optimized algorithm (in orange).*
 
@@ -661,10 +661,9 @@ E = 2 J
 
 **Result:** 2 Joules were consumed by the board in 10 seconds.
 
-<h2 align="center">🌟 ⭐ Enjoyed it? Don't forget to leave a star! ⭐ 🌟</h2>
+<h2 align="center">🌟 ⭐ Liked this project? Don’t forget to give it a star! ⭐ 🌟</h2>
 
 ## 👥 Development Team
-Members who participated in the development of this project:
 
 | [![GitHub User 1](https://github.com/Joaosa100.png?size=420)](https://github.com/Joaosa100) | [![GitHub User 2](https://github.com/AugustaSousa.png?size=420)](https://github.com/AugustaSousa) |
 |:-----------------------------------------------:|:-----------------------------------------------:|

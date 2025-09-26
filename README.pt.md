@@ -66,7 +66,7 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
      <br>
       ![Validacao - py](images/assets/firstAlgorithmTest/comp45er.png)
 
-      *Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 87 pixels no total de 2025 (45x45), totalizando 4.3% de erro utilizando uma tolerância de diferença zero.*
+      *Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utilizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 87 pixels no total de 2025 (45x45), totalizando 4.3% de erro utilizando uma tolerância de diferença zero.*
 
 1. **Melhorando o algoritmo:**
    - Mesmo com uma leve diferença, era necessário atingir 100% de semelhança com a saída da Pywavelets, então modificamos o algoritmo e o salvamos neste arquivo [**haar_transform_2d.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform_2d.c).
@@ -116,7 +116,7 @@ Desenvolver o algoritmo para aplicar a Transformada 2D de Haar em imagens no for
      <br>
       ![Validacao - py](images/assets/improvedAlgorithmTest/comp45LL.png)
 
-      *Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 0 pixels no total de 2025 (45x45), totalizando 0.0% de erro utilizando uma tolerância de diferença zero.*
+      *Diferenças entre os resultados obtidos no algoritmo implementado em C e Python (Pywavelets) utilizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 0 pixels no total de 2025 (45x45), totalizando 0.0% de erro utilizando uma tolerância de diferença zero.*
 1. **Medição de consumo de RAM**
    - Compile o código para gerar o executável da mesma maneira que fizemos para os testes:<br>
    ```bash
@@ -213,7 +213,7 @@ Nos foi apresentado como fazer um "Hello World" na placa, o famoso Pisca Led (Bl
 Como mais placas estavam disponíveis neste dia, enfim conseguimos pegar uma funcional para fazer alguns testes
 
 ### ==> Checkpoint 1
-Após uma hora modificando o código e entendo melhor como funcionava a comunicação da API na prática (já que não dava para testar em casa), havia uma biblioteca que precisava ser adicionada, mas que não era mensionada na API e nem pelo professor. Essa era a **biblioteca de registradores**
+Após uma hora modificando o código e entendendo melhor como funcionava a comunicação da API na prática (já que não dava para testar em casa), havia uma biblioteca que precisava ser adicionada, mas que não era mencionada na API e nem pelo professor. Essa era a **biblioteca de registradores**
 ```c
 #include "stm32f0xx.h"
 ```
@@ -268,12 +268,12 @@ void printResult(int matrix[MAX_SIZE][MAX_SIZE], int size) {
     }
 
 ```
-> Como tínhamos pouco tempo, adaptamos um pouco o código antigo (Parte 1) e fizemos uma função de print, que percebemos momentos depois que a aula havia acabado que não era necessária. Porém o intuito aqui sempre foi aprender com os erros a medida que eles fossem aparecendo
+> Como tínhamos pouco tempo, adaptamos um pouco o código antigo (Parte 1) e fizemos uma função de print, que percebemos momentos depois que a aula havia acabado que não era necessária. Porém o intuito aqui sempre foi aprender com os erros à medida que eles fossem aparecendo
 
 ---
 
 ### 🔥 Terceiro dia - A demonstração do código
-Hoje era um dia diferente, pois era o dia de **demonstrar o funcionamento do código para o professor**, e conhecendo ele com certeza perderíamos pontos ao apresentar uma programa que não conseguisse ler uma **entrada com ao menos 8000 números inteiros**.
+Hoje era um dia diferente, pois era o dia de **demonstrar o funcionamento do código para o professor**, e conhecendo ele com certeza perderíamos pontos ao apresentar um programa que não conseguisse ler uma **entrada com ao menos 8000 números inteiros**.
 
 Estávamos muito pressionados com isso, mas como éramos a última equipe a demonstrar o código, tiramos vantagem disso.
 
@@ -325,9 +325,9 @@ void haarTransform2D(const int input[][IMAGE_SIZE]) {
       //matrix here
     }
 ```
-> Algumas coisas básicas como printar o código após o cálculo e utilizar apenas inteiros nós conseguimos ver antes da demonstração, mas foi durante ela que o professor disse que o uso do BLOCK_SIZE era desnecessário.
+> Algumas coisas básicas como printar o código após o cálculo e utilizar apenas inteiros, nós conseguimos ver antes da demonstração, mas foi durante ela que o professor disse que o uso do BLOCK_SIZE era desnecessário.
 
-Conseguimos atingir o objetivo principal de consumir 8000 inteiros de entrada com uma grande limitação de memória, mas nã́o deixaríamos esse BLOCK_SIZE desnecessário no código. Então, decidimos usar o outro dia para limpar e otimizar todo o código.
+Conseguimos atingir o objetivo principal de consumir 8000 inteiros de entrada com uma grande limitação de memória, mas não deixaríamos esse BLOCK_SIZE desnecessário no código. Então, decidimos usar o outro dia para limpar e otimizar todo o código.
 
 ---
 
@@ -372,7 +372,7 @@ void haarTransform2d(const int input[][IMAGE_SIZE]) {
 > Com calma revisamos e limpamos bastante o código, inclusive ficou bem mais fácil de lê-lo.
 
 ### Resultado da demonstração
-Depois de tudo, este foi o resultado do teste de [**validacão**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/validacao.py) do [**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp) com o [**haar_wavelet.py**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/haarWavelet.py)
+Depois de tudo, este foi o resultado do teste de [**validação**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/validacao.py) do [**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp) com o [**haar_wavelet.py**](https://github.com/Joaosa100/Haar-Transformation/blob/main/tests/haarWavelet.py)
 
    | **Imagem Original** | **Resultado C** | **Resultado Python** |
    |----------------------|------------------|----------------------|
@@ -382,7 +382,7 @@ Depois de tudo, este foi o resultado do teste de [**validacão**](https://github
      <br>
       ![Validacao - py](images/assets/improvedAlgorithmTest/comp45LL.png)
 
-      *Diferenças entre os resultados obtidos no algoritmo implementado em C para a placa e Python (Pywavelets) utlizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 0 pixels no total de 2025 (45x45), totalizando 0.0% de erro utilizando uma tolerância de diferença zero.*
+      *Diferenças entre os resultados obtidos no algoritmo implementado em C para a placa e Python (Pywavelets) utilizando apenas a parte comprimida. Cada ponto branco representa a divergência identificada na transformação de Haar. Houve uma diferença em 0 pixels no total de 2025 (45x45), totalizando 0.0% de erro utilizando uma tolerância de diferença zero.*
 
 ### Consumo de memória
 O próprio Mbed, durante o build, faz a medição de memória do .elf antes de convertê-lo para .bin<br>
@@ -513,7 +513,7 @@ Quanto às outras variáveis, apenas **3** foram afetadas pela melhoria: *col*, 
 ❌ **Sendo assim, esta foi considerada uma melhoria insuficiente para avaliação.** ❌ 
 
 
-Então, usamos as aulas restantes para melhorar o código em **tempo de computação**, mas nos restava pouco tempo e **já haviamos enxugado e melhorado bastante o código** da Parte 1 ([**haar_transform_2d.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform_2d.c)) para a Parte 2 ([**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp)), tornando mais difícil encontrar melhorias significativas;<br>
+Então, usamos as aulas restantes para melhorar o código em **tempo de computação**, mas nos restava pouco tempo e **já havíamos enxugado e melhorado bastante o código** da Parte 1 ([**haar_transform_2d.c**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work1/haar_transform_2d.c)) para a Parte 2 ([**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp)), tornando mais difícil encontrar melhorias significativas;<br>
 
 Como não encontramos uma solução otimizada durante as aulas, só pudemos medir a energia usando o código [**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp).
 
@@ -521,7 +521,7 @@ Como não encontramos uma solução otimizada durante as aulas, só pudemos medi
 #### ⚔️ **NÃO DESISTIMOS !** ⚔️ 
 **Transporte do código para o PC** 🖥️: Como as aulas com a placa já haviam terminado, e nós não tínhamos ainda encontrado uma alternativa otimizada de código, transportamos o código da placa para o PC para encontrar uma otimização em tempo de computação.    
 
-Depois de muito debuggar e revirar o código, encontramos enfim uma inconsistência e uma melhoria em tempo.
+Depois de muito debugar e revirar o código, encontramos enfim uma inconsistência e uma melhoria em tempo.
 
 Código antes: 
 ```c
@@ -556,7 +556,7 @@ int main() {
 ```
 > Visualização parcial do código [**haar_transform_2d_stm.cpp**](https://github.com/Joaosa100/Haar-Transformation/blob/main/work2/haar_transform_2d_stm.cpp)
 
-Na condição temos 2 ternários e a verificação de números negativos é considerada desnecessária, pois em um arquivo PGM P2 todos os números presentes estão no intervalo fechado [0 - 255], então ao somar números positivos e dividí-los por outro positivo, apenas teremos números positivos ou nulos. Então, retiramos essa verificação.
+Na condição temos 2 ternários e a verificação de números negativos é considerada desnecessária, pois em um arquivo PGM P2 todos os números presentes estão no intervalo fechado [0 - 255], então ao somar números positivos e dividi-los por outro positivo, apenas teremos números positivos ou nulos. Então, retiramos essa verificação.
 
 Porém a grande melhoria está na divisão, tentamos modificá-la para sum = sum * 0.5; mas não havia mudanças de tempo, então alteramos a divisão para um shift de valor para a direita e os resultados foram surpreendentes:
 ```c
@@ -619,9 +619,9 @@ Utilizamos a biblioteca chrono para medição de tempo no algoritmo no PC.
 
 **😎 UMA ECONOMIA DE ATÉ 30% EM TEMPO DE COMPUTAÇÃO!**
 
-Gráfico dos testes usado na apresentação:
+Gráfico dos testes usados na apresentação:
 ![Otimized Vs Not Otimized](images/assets/consumption/timeBoards.png)<br>
-*Gráfico comparando os resultados de cada teste do algoritmo não otimizado (em azul) com o algoritmo otilmizado (em laranja).*
+*Gráfico comparando os resultados de cada teste do algoritmo não otimizado (em azul) com o algoritmo otimizado (em laranja).*
 
 ---
 ### 📦 Medições de Memória
